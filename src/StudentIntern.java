@@ -6,7 +6,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     private String school;
     private ArrayList<Task> taskLog;
     private ArrayList<TimeLog> timeLogs;
-    private Evaluate evaluation;
+    private Evaluation evaluation;
 
     //constructor
     public StudentIntern(String srCode, String name, String email, String password, String role){
@@ -37,16 +37,16 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         System.out.println("Name: " + getName());
         System.out.println("Sr-Code: " + getSrCode());
         System.out.println("Active Tasks" + taskLog.size());
-        System.out.println("Total Time of Hours: " + totalGetTotalHours());
+        System.out.println("Total Time of Hours: " + getTotalHours());
         if(evaluation != null){
-            System.out.println("Evaluation Score: " + evaluation.getTotalScore() + "/5");
+            System.out.println("Evaluation Score: " + evaluation.getScore() + "/5");
         }
         System.out.println("=======================================================");
     }
 
     //methods for the interns assigned task.
     public void receiveTask(Task task){
-        task.add();
+        taskLog.add(task);
         System.out.println("Inter " + getName() + " receive task " + task.getTaskName());
     }
     public void completeTask(Task task){
@@ -54,10 +54,10 @@ public class StudentIntern extends User implements Evaluate,Tracker{
             if(task == null){
                 throw new NullPointerException("Task should not be leave null or blank!!");
             }
-            if(!task.contains(task)){
+            if(!taskLog.contains(task)){
                 throw new IllegalStateException("Task not assign to this intern");
             }
-            task.setUpdatedStatus("Completed");
+            task.setStatus("Completed");
             System.out.println("Intern " + getName() + " completed task " + task.getTaskName());
         }
         catch(NullPointerException e){
@@ -71,7 +71,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         }
     }
 
-    //Override from the abstract interface
+    //Override(Polymorphism) from the abstract interface
     @Override
     //for login hours
     public void loginData(double hours, String date){
@@ -120,10 +120,10 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         return total;
     }
 
-    //Implementing the evaluation
+    //(Polymorphism)Implementing the evaluation(Submission and Viewing)
     @Override
-    public void submitEvaluation(Evaluate evaluate){
-        this.evaluation = evaluate;
+    public void submitEvaluation(Evaluation eval){
+        this.evaluation = eval;
     }
 
     @Override
