@@ -75,7 +75,7 @@ public class School extends User{
             }
 
             receivedInternsRecommendation.add(intern);
-            System.out.println(schoolName + " has received internship recommendedation.");
+            System.out.println(schoolName + " has received internship recommendation.");
             System.out.println("Position: " + intern.getPosition());
             System.out.println("From the Sister Company: " + companyName);
             System.out.println("Status Available for student recommendation");
@@ -132,7 +132,7 @@ public class School extends User{
 
             intern.setIntern(studentIntern);
             levelOfRecommendation++;
-            System.out.println("School " + getName() + " recommended " + studentIntern.getName() + " for intership at " + intern.getCompanyName());
+            System.out.println("School " + getName() + " recommended " + studentIntern.getName() + " for internship at " + intern.getCompanyName());
         }
         catch(IllegalArgumentException e){
             System.out.println("Error has been occurred: " + e.getMessage());
