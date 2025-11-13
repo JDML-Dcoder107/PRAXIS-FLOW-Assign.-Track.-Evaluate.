@@ -10,6 +10,7 @@ public class PraxisFlowMain {
     private static ArrayList<StudentIntern> stInterns = new ArrayList<>();
     private static ArrayList<Task> task = new ArrayList<>();
 
+
     public static void main(String[] args) {
         System.out.println("=============================================");
         System.out.println("Praxis Flow");
