@@ -30,6 +30,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     //Polymorphism
     @Override
     public void displayView(){
+        System.out.println();
         System.out.println("================================");
         System.out.println("||      Intern Dashboard      ||");
         System.out.println("================================");
