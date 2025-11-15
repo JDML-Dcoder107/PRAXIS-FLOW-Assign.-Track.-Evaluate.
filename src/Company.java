@@ -47,7 +47,7 @@ public class Company extends User implements Evaluate{
     }
 
     //method for adding / sister school
-    public void addPartnerSchool(String nameOfSchool, School schoolName){
+    public void addPartnerSchool(String nameOfSchool){
         try{
             if(nameOfSchool == null || nameOfSchool.isEmpty()){
                 throw new IllegalArgumentException("School should not be left null or empty.");

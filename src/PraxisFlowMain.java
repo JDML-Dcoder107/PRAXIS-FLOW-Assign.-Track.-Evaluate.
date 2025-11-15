@@ -105,6 +105,7 @@ public class PraxisFlowMain {
     private static void userRoleMenu(User user){
         boolean inSession = true;
 
+        //For the admin main
         if(user instanceof AdminMain) {
             System.out.println("1. Approve Internship");
             System.out.println("2. View Dashboard");
@@ -127,6 +128,7 @@ public class PraxisFlowMain {
             }
         }
 
+            //For the School
             else if(user instanceof School){
             System.out.println("1. Add Partner Company");
             System.out.println("2. View Internship Recommendation");
@@ -149,11 +151,14 @@ public class PraxisFlowMain {
                 case 5: user.displayView();
                 break;
                 case 6: user.logOut();
+                inSession = false;
                 break;
                 default:
                     System.out.println("Invalid input please enter a number between (1-6)\n");
             }
             }
+
+            //For the Company
             else if(user instanceof Company){
             System.out.println("1. Add Partner School: ");
             System.out.println("2. Recommended Internship to School");
@@ -169,21 +174,154 @@ public class PraxisFlowMain {
                 break;
                 case 2: recommendInternshipToSchoolByMentorOrSupervisor(mentor);
                 break;
-                case 3:assignTaskToInternMenu(mentor);
+                case 3: assignTaskToInternMenu(mentor);
                 break;
                 case 4: submitEvalToInternMenu(mentor);
                 break;
                 case 5: user.displayView();
                 break;
                 case 6: user.logOut();
+                inSession = false;
                 break;
                 default:
                     System.out.println("Invalid input please enter a number between (1-6)\n");
             }
         }
 
+            //For the Student Intern
+            else if(user instanceof StudentIntern){
+            System.out.println("1. Log Hours");
+            System.out.println("2. Complete Task");
+            System.out.println("3. View Timesheet");
+            System.out.println("4. View Dashboard");
+            System.out.println("5. Logout");
+
+            int choice = getInputInteger("Enter a number(1-5): ");
+            switch (choice){
+                case 1: logHoursForStudentIntern((StudentIntern) user);
+                break;
+                case 2: completeTaskMenu((StudentIntern) user);
+                break;
+                case 3: ((StudentIntern) user).viewTimesheet();;
+                break;
+                case 4: user.displayView();;
+                break;
+                case 5: user.logOut();
+                inSession = false;
+                default:
+                    System.out.println("Invalid input please enter a number between 1-5\n");
+            }
+        }
 
     }
+
+    //method for the display and the input location in the creation of internship
+    private static void createInternshipMenu(){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Create Internship");
+        System.out.println("=============================================");
+        System.out.print("Enter Internship ID: ");
+        String internID = input.nextLine();
+        System.out.print("Enter Company Name: ");
+        String companyName = input.nextLine();
+        System.out.print("Enter Position: ");
+        String position = input.nextLine();
+
+        Internship intern = new Internship(internID, companyName, position);
+        internships.add(intern);
+        System.out.println("Internship created: " + intern);
+    }
+
+    //method for the establishement of partnership to school
+    private static void establishPartnerShip(){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Establish Partnership");
+        System.out.println("=============================================");
+        System.out.println("1. Company adds Partner School");
+        System.out.println("2. School adds Partner Company");
+
+        int choice = getInputInteger("Enter a number(1-2): ");
+
+        if(choice == 1){
+            if (company.isEmpty()){
+                System.out.println("No company mentors and supervisor available.");
+                return;
+            }
+
+            System.out.println("\nCompany Mentors/Supervisor:");
+            for(int i = 0; i < company.size(); i++){
+                System.out.println((i + 1) + "." + company.get(i).getName() + " - " + company.get(i).getCompanyName());
+            }
+            int companyMentorIndex = getInputInteger("Select a mentor/supervisor: ") - 1;
+
+            if(companyMentorIndex >= 0 && companyMentorIndex < company.size()){
+                System.out.print("Enter partner school name: ");
+                String schoolName = input.nextLine();
+                company.get(companyMentorIndex).addPartnerSchool(schoolName);
+            }
+        }
+        else if (choice == 2){
+            if(school.isEmpty()){
+                System.out.println("Their is no school coordinators available at the moment.");
+                return;
+            }
+
+            System.out.println();
+            System.out.println("School Coordinators:");
+            for(int i = 0; i < school.size(); i++){
+                System.out.println((i+1) + ". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
+            }
+            int scIndex = getInputInteger("Select a School Coordinator: ") - 1;
+
+            if(scIndex >= 0 && scIndex < school.size()){
+                System.out.print("Enter partner company name: ");
+                String companyName = input.nextLine();
+                school.get(scIndex).addPartnerCompany(companyName);
+            }
+        }
+    }
+
+    //method for the recommendation of internship
+    private static void recommendInternshipToSchoolByMentorOrSupervisor(){
+        if(company.isEmpty() || school.isEmpty() || internships.isEmpty()){
+            System.out.println("Need company mentors, school coordinators, and internship in this system.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Recommend Internship to School");
+        System.out.println("=============================================");
+        for(int i = 0; i < company.size(); i++){
+            System.out.println((i + 1) + ". " + company.get(i).getName() + " - " + company.get(i).getCompanyName());
+        }
+
+        int companyIndex = getInputInteger("Select Mentor: ") - 1;
+
+        if(companyIndex >= 0 && companyIndex < company.size()){
+            System.out.println("\nAvailable Internships: ");
+            for(int i = 0; i < internships.size(); i++){
+                System.out.println((i + 1) + ". " + internships.get(i));
+            }
+
+            int internIndex = getInputInteger("Select internship: ") - 1;
+
+            System.out.println();
+            System.out.println("School Coordinator: ");
+            for(int i = 0; i < school.size(); i++){
+                System.out.println((i+1) +". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
+            }
+
+            int scIndex = getInputInteger("Select School: ") - 1;
+
+            if(internIndex >= 0 && internIndex < internships.size() && scIndex >= 0 && scIndex < school.size()){
+                company.get(companyIndex).recommendInternshipToSchool(internships.get(internIndex), school.get(scIndex));
+            }
+        }
+    }
+
 
     //method for the students main menu
     private static void studentMainMenu(){
