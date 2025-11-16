@@ -8,7 +8,7 @@ public class Task {
     private String status;
 
     //constructor
-    public Task(String taskId, String taskName, String description, String dueDate, String status){
+    public Task(String taskId, String taskName, String description, String dueDate){
         this.taskId = taskId;
         this.taskName = taskName;
         this.description = description;

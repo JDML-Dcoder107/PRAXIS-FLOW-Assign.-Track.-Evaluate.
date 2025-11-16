@@ -233,7 +233,7 @@ public class PraxisFlowMain {
         System.out.println("Internship created: " + intern);
     }
 
-    //method for the establishement of partnership to school
+    //method for the establishment of partnership to school
     private static void establishPartnerShip(){
         System.out.println();
         System.out.println("=============================================");
@@ -284,7 +284,7 @@ public class PraxisFlowMain {
     }
 
     //method for the recommendation of internship
-    private static void recommendInternshipToSchoolByMentorOrSupervisor(){
+    private static void recommendInternshipToSchoolMenu(){
         if(company.isEmpty() || school.isEmpty() || internships.isEmpty()){
             System.out.println("Need company mentors, school coordinators, and internship in this system.");
             return;
@@ -322,6 +322,128 @@ public class PraxisFlowMain {
         }
     }
 
+    //method for the adding of partner school
+    private static void addPartnerSchoolMenu(Company company){
+        System.out.print("Enter the partner school's name: ");
+        String schoolName = input.nextLine();
+        company.addPartnerSchool(schoolName);
+    }
+
+    //method for the adding a partner company
+    private static void addPartnerCompanyMenu(School school){
+        System.out.print("Enter the partner company's name: ");
+        String companyName = input.nextLine();
+        school.addPartnerCompany(companyName);
+    }
+
+    private static void recommendInternshipToSchoolByMentorOrSupervisor(Company company){
+        if(internships.isEmpty() || school.isEmpty()){
+            System.out.println("Need internships and school coordinators in system.");
+            return;
+        }
+
+        System.out.println();
+        System.out.print("Available Internship: ");
+        for(int i = 0 ; i < internships.size(); i++){
+            System.out.println((i + 1) + ". " + internships.get(i));
+        }
+        int internIndex = getInputInteger("Select internship: ") - 1;
+
+        System.out.println();
+        System.out.print("School Coordinators: ");
+        for(int i = 0; i < school.size(); i++){
+            System.out.println((i + 1) + ". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
+        }
+        int scIndex = getInputInteger("Select a school: ");
+
+        if(internIndex >= 0 && internIndex < internships.size() && scIndex >= 0 && school.size() > scIndex){
+            company.recommendInternshipToSchool(internships.get(internIndex), school.get(scIndex));
+        }
+    }
+
+    //method for the assigning of task
+    private static void assignTaskToInternMenu(){
+        if(stInterns.isEmpty()){
+            System.out.println("No interns available at the moment.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Assign Task Menu");
+        System.out.println("=============================================");
+        System.out.print("Enter Task ID: ");
+        String taskID = input.nextLine();
+        System.out.print("Enter Task Name: ");
+        String taskName = input.nextLine();
+        System.out.print("Enter Description: ");
+        String description = input.nextLine();
+        System.out.println("Enter the Deadline/Due Date (YYYY-MM-DD): ");
+        String dueDate = input.nextLine();
+
+        Task tasks = new Task(taskID, taskName, description, dueDate);
+        task.add(tasks);
+
+        System.out.println();
+        System.out.println("Available Interns: ");
+        for(int i = 0; i < stInterns.size(); i++){
+            System.out.println((i + 1) + ". " + stInterns.get(i).getName() + " (" + stInterns.get(i).getSrCode() + ")" );
+        }
+        int stInternIndex = getInputInteger("Select intern number: ") - 1;
+        if(stInternIndex >= 0 && stInternIndex< stInterns.size()){
+            System.out.println("Task assigned successfully!");
+        }
+        else{
+            System.out.println("Invalid input, Please try again.");
+        }
+    }
+
+    //method for the log hours for the interns
+    private static void logHoursForStudentIntern(StudentIntern studentIntern){
+        System.out.print("Enter hours worked: ");
+        double hours = getInputDouble();
+        System.out.print("Enter date (YYYY-MM-DD): ");
+        String date = input.nextLine();
+
+        studentIntern.loginData(hours, date);
+    }
+
+    private static void submitEvalToInternMenu(){
+        if(stInterns.isEmpty() || company.isEmpty()){
+            System.out.println("Invalid!! the system need both interns and company mentors.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Submit Evaluation");
+        System.out.println("=============================================");
+        System.out.println("Student Interns: ");
+        for(int i = 0; i < stInterns.size(); i++){
+            System.out.println((i + 1) + ". " + stInterns.get(i).getName());
+        }
+
+        int stIndex = getInputInteger("Select student intern to evaluate: ") - 1;
+        if(stIndex >= 0 && stIndex < stInterns.size()){
+            System.out.print("Enter evaluation score (1 \"Highest\"- 5 \"Lowest\"): ");
+            double score = getInputDouble();
+            System.out.println("Enter feedback: ");
+            String feedback = input.nextLine();
+
+            System.out.println("Company Mentors/Supervisor: ");
+            for(int i = 0; i < company.size(); i++){
+                System.out.println((i + 1) + ". " + company.get(i).getName());
+            }
+            int companyIndex = getInputInteger("Select evaluator: ") - 1;
+
+            if(companyIndex >= 0 && companyIndex < company.size()){
+                String evalID = "EVALUATED ON: " + System.currentTimeMillis();
+                Evaluation eval = new Evaluation(evalID, score, feedback, company.get(companyIndex).getName(), stInterns.get(stIndex).getName());
+                company.get(companyIndex).submitEvaluation(eval);
+                stInterns.get(stIndex).submitEvaluation(eval);
+            }
+        }
+    }
 
     //method for the students main menu
     private static void studentMainMenu(){
