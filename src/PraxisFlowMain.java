@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class PraxisFlowMain {
             }
         }
     }
-    public static double getInputDouble (){
+    private static double getInputDouble (){
         try{
             double value = Double.parseDouble(input.nextLine());
             return value;
@@ -47,8 +48,37 @@ public class PraxisFlowMain {
         }
     }
 
+    //method for the registration for new user
+    private static void userRegisterMenu(){
+        System.out.println("=============================================");
+        System.out.println("Register Menu");
+        System.out.println("=============================================");
+
+        System.out.print("Enter Email: ");
+        String email = input.nextLine();
+
+        String studentRegex = "^\\d{2}-\\d{5}@g\\.batstate-u\\.edu\\.ph$";
+        if(email.matches(studentRegex)){
+            System.out.println("Valid Email Address for Student Intern!");
+
+            System.out.print("Enter Password: ");
+            String password = input.nextLine();
+
+            System.out.print("Confirm Password: ");
+            String confirmPassword = input.nextLine();
+
+            if(password.equals(confirmPassword)){
+                System.out.println("Registration Successful!");
+            }
+            else{
+                System.out.println("Password do not match to each other. Try again");
+            }
+        }
+
+
+    }
     //method for the login main menu
-    public static void userLoginMenu(){
+    private static void userLoginMenu(){
         System.out.println("=============================================");
         System.out.println("User Login Menu");
         System.out.println("=============================================");
@@ -114,7 +144,7 @@ public class PraxisFlowMain {
             int choice = getInputInteger("Enter choice(1-3): ");
             switch (choice) {
                 case 1:
-                    approveInternshipMenu((AdminMain));
+                    approveInternshipMenu((AdminMain) user);
                     break;
                 case 2:
                     user.displayView();
@@ -146,7 +176,7 @@ public class PraxisFlowMain {
                 break;
                 case 3: recommendStudentMenu(school);
                 break;
-                case 4: monitorProgessMenu(school);
+                case 4: monitorProgesMenu(school);
                 break;
                 case 5: user.displayView();
                 break;
@@ -362,7 +392,7 @@ public class PraxisFlowMain {
     }
 
     //method for the assigning of task
-    private static void assignTaskToInternMenu(){
+    private static void assignTaskToInternMenu(Company mentor){
         if(stInterns.isEmpty()){
             System.out.println("No interns available at the moment.");
             return;
@@ -408,7 +438,7 @@ public class PraxisFlowMain {
         studentIntern.loginData(hours, date);
     }
 
-    private static void submitEvalToInternMenu(){
+    private static void submitEvalToInternMenu(Company mentor){
         if(stInterns.isEmpty() || company.isEmpty()){
             System.out.println("Invalid!! the system need both interns and company mentors.");
             return;
@@ -445,6 +475,166 @@ public class PraxisFlowMain {
         }
     }
 
+    //method for the approval of internship
+    private static void approveInternshipMenu(AdminMain admin){
+        if(internships.isEmpty()){
+            System.out.println("No internships to approve.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Pending Internships:");
+        for (int i = 0; i < internships.size(); i++){
+            System.out.println((i + 1) + ". " + internships.get(i));
+        }
+
+        int index = getInputInteger("Select internship to approve: ");
+        if (index >= 0 && index < internships.size()){
+            admin.approveInternship(internships.get(index));
+        }
+    }
+
+    //method for the recommendation to student
+    private static void recommendStudentMenu(School school){
+        if(stInterns.isEmpty() || internships.isEmpty()){
+            System.out.println("Student Intern's and Internships are both required in this system.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Student Interns:");;
+        for(int i = 0; i <  stInterns.size(); i++){
+            System.out.println((i + 1) + ". " + stInterns.get(i).getName());
+        }
+        int internIndex = getInputInteger("Select Intern: ");
+
+        System.out.println();
+        System.out.println("Internships:");
+        for (int i = 0; i < internships.size(); i++){
+            System.out.println((i + 1) + ". " + internships.get(i));
+        }
+
+        int internshipIndex = getInputInteger("Select internship: ") - 1;
+
+        if(internIndex >= 0 && internIndex < stInterns.size() && internshipIndex >= 0 && internshipIndex < internships.size()){
+            school.recommendStudent(stInterns.get(internIndex), internships.get(internshipIndex));
+        }
+    }
+
+    //method for the progress view
+    private static void monitorProgesMenu(School school){
+        if(stInterns.isEmpty()){
+            System.out.println("No interns to monitor to be found.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("Student Intern: ");
+        for(int i = 0; i < stInterns.size(); i++){
+            System.out.println((i + 1) + ". " + stInterns.get(i).getName());
+        }
+        int index = getInputInteger("Select Student Intern: ");
+
+        if(index >= 0 && index < stInterns.size()){
+            school.monitorProcess(stInterns.get(index));
+        }
+    }
+
+    //method for the assign task to intern
+    private static void completeTaskMenu(StudentIntern studentIntern){
+       if(task.isEmpty()){
+           System.out.println("No task available at the moment.");
+           return;
+       }
+
+        System.out.println();
+        System.out.println("Task: ");
+        for(int i = 0; i < task.size(); i++) {
+            System.out.println((i + 1) + ". " + task.get(i));
+        }
+
+        int index = getInputInteger("Select task to complete: ") - 1;
+
+        if (index >= 0 && index < task.size()){
+            studentIntern.completeTask(task.get(index));
+        }
+    }
+
+    //method for viewing all user
+    private static void viewAllUser(){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("ALl User");
+        System.out.println("=============================================");
+        System.out.println();
+        System.out.println("Administrator: ");
+        for (AdminMain admin : mainAdmin){
+            System.out.println(" - " + admin.getName() + " (" + admin.getEmail() + ")");
+        }
+
+        System.out.println();
+        System.out.println("School Coordinators: ");
+        for(School coordinator : school){
+            System.out.println(" -" + coordinator.getName() + " - " + coordinator.getSchoolName());
+        }
+
+        System.out.println();
+        System.out.println("Company Mentors/Supervisors:");
+        for(Company mentor : company){
+            System.out.println(" - " + mentor.getName() + " - " + mentor.getCompanyName());
+        }
+
+        System.out.println();
+        System.out.println("Student Interns: ");
+        for(StudentIntern studentIntern : stInterns){
+            System.out.println(" - " + studentIntern.getName() + " ( "+ studentIntern.getSrCode() + ")");
+        }
+    }
+
+    //method for the viewing of all internship
+    private static void viewALlInternships(){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("ALl Internships");
+        System.out.println("=============================================");
+        if(internships.isEmpty()){
+            System.out.println("No internship created yet.");
+        }
+        else{
+            for(Internship intern : internships){
+                System.out.println(intern);
+            }
+        }
+    }
+
+    private static void viewPartnershipsMenu(){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Partnerships");
+        System.out.println();
+        System.out.println("--- Company -> School Partnerships ---");
+        System.out.println("=============================================");
+        for(Company mentor : company){
+            if(!mentor.getPartnerSchools().isEmpty()){
+                System.out.println(mentor.getCompanyName() + " partners with: ");
+                for(String school : mentor.getPartnerSchools()){
+                    System.out.println(" ." + school);
+                }
+            }
+        }
+
+        System.out.println();
+        System.out.println("--- School -> Company Partnerships ---");
+        for(School coordinator : school){
+            if(!coordinator.getPartnerCompanies().isEmpty()){
+                System.out.println(coordinator.getSchoolName() + " partners with:");
+                for(String company : coordinator.getPartnerCompanies()){
+                    System.out.println(" ." + company) ;
+                }
+            }
+        }
+        System.out.println("=============================================");
+    }
     //method for the students main menu
     private static void studentMainMenu(){
         System.out.println();
@@ -491,7 +681,7 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
     }
 
-    public static int getInputInteger (String integer){
+    private static int getInputInteger (String integer){
         System.out.println(integer);
         try {
             int value = Integer.parseInt(input.nextLine());
