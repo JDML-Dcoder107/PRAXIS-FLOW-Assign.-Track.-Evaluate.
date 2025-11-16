@@ -54,11 +54,11 @@ public class Company extends User implements Evaluate{
             }
 
             if(partnerSchools.contains(nameOfSchool)){
-                throw new IllegalStateException("The school " + schoolName.getName() + " is already a part of the partnership.");
+                throw new IllegalStateException("The school is already a part of the partnership.");
             }
 
             partnerSchools.add(nameOfSchool);
-            System.out.println(schoolName + " is added as partner/sister school to " + companyName);
+            System.out.println(nameOfSchool + " is added as partner/sister school to " + companyName);
         }
         catch(IllegalArgumentException | IllegalStateException e){
             System.out.println("Error has been occurred: " + e.getMessage());

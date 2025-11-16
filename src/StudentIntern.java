@@ -9,7 +9,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     private Evaluation evaluation;
 
     //constructor
-    public StudentIntern(String srCode, String name, String email, String password, String role){
+    public StudentIntern(String srCode, String name, String email, String password, String role, String schoolName){
         super(srCode, name, email, password, "Student Intern");
         this.srCode = srCode;
         this.school = school;

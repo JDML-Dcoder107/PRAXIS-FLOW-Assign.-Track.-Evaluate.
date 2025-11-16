@@ -1,4 +1,3 @@
-import java.sql.SQLOutput;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -10,7 +9,10 @@ public class PraxisFlowMain {
     private static ArrayList<School> school = new ArrayList<>();
     private static ArrayList<StudentIntern> stInterns = new ArrayList<>();
     private static ArrayList<Task> task = new ArrayList<>();
-
+    private static final String studentRegex = "^\\d{2}-\\d{5}@g\\.batstate-u\\.edu\\.ph$";
+    private static final String companyRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|org|net|co\\.[a-z]{2,})$";
+    private static final String schoolRegex = "^[a-zA-Z][a-zA-Z0-9._-]*@g\\.batstate-u\\.edu\\.ph$";
+    private static final String adminRegex = "^admin[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\\.[a-z]{2,}$";
 
     public static void main(String[] args) {
         boolean isItRunning = true;
@@ -54,21 +56,27 @@ public class PraxisFlowMain {
         System.out.println("Register Menu");
         System.out.println("=============================================");
 
+        System.out.print("Enter User ID: ");
+        String userID = input.nextLine();
+        System.out.print("Enter your name: ");
+        String name = input.nextLine();
         System.out.print("Enter Email: ");
         String email = input.nextLine();
 
-        String studentRegex = "^\\d{2}-\\d{5}@g\\.batstate-u\\.edu\\.ph$";
-        if(email.matches(studentRegex)){
-            System.out.println("Valid Email Address for Student Intern!");
 
+        if(email.matches(studentRegex)){
             System.out.print("Enter Password: ");
             String password = input.nextLine();
-
             System.out.print("Confirm Password: ");
             String confirmPassword = input.nextLine();
+            System.out.print("Enter SrCode: ");
+            String srCode = input.nextLine();
+            System.out.print("Enter School: ");
+            String schoolName = input.nextLine();
 
             if(password.equals(confirmPassword)){
-                System.out.println("Registration Successful!");
+                stInterns.add(new StudentIntern(userID, name, email, password, srCode, schoolName));
+                System.out.println("Student Intern Registration Successful!");
             }
             else{
                 System.out.println("Password do not match to each other. Try again");
@@ -84,7 +92,7 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
         System.out.print("Enter email: ");
         String email = input.nextLine();
-        System.out.println("Enter password: ");
+        System.out.print("Enter password: ");
         String password = input.nextLine();
 
         //Attempting to find the inputted login credentials
@@ -682,7 +690,7 @@ public class PraxisFlowMain {
     }
 
     private static int getInputInteger (String integer){
-        System.out.println(integer);
+        System.out.print(integer);
         try {
             int value = Integer.parseInt(input.nextLine());
             return value;
