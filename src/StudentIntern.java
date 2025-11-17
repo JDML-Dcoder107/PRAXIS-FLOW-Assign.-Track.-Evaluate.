@@ -12,7 +12,6 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     public StudentIntern(String srCode, String name, String email, String password, String role, String schoolName){
         super(srCode, name, email, password, "Student Intern");
         this.srCode = srCode;
-        this.school = school;
         this.taskLog = new ArrayList<>();
         this.timeLogs = new ArrayList<>();
     }
@@ -37,7 +36,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         System.out.println();
         System.out.println("Name: " + getName());
         System.out.println("Sr-Code: " + getSrCode());
-        System.out.println("Active Tasks" + taskLog.size());
+        System.out.println("Active Tasks: " + taskLog.size());
         System.out.println("Total Time of Hours: " + getTotalHours());
         if(evaluation != null){
             System.out.println("Evaluation Score: " + evaluation.getScore() + "/5");
@@ -61,10 +60,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
             task.setStatus("Completed");
             System.out.println("Intern " + getName() + " completed task " + task.getTaskName());
         }
-        catch(NullPointerException e){
-            System.out.println("Error found: " + e.getMessage());
-        }
-        catch(IllegalStateException e){
+        catch(NullPointerException | IllegalStateException e){
             System.out.println("Error found: " + e.getMessage());
         }
         catch(Exception e){
@@ -85,7 +81,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
             }
             TimeLog log = new TimeLog(date, hours, getName());
             timeLogs.add(log);
-            System.out.println("You are logged on" + hours + " hours on the day of " + date + " as intern " + getName());
+            System.out.println("You are logged on " + hours + " hours on the day of " + date + " as intern " + getName());
         }
         catch(IllegalArgumentException e){
             System.out.println("Time logging error: " + e.getMessage());

@@ -2,13 +2,13 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class PraxisFlowMain {
-    private static Scanner input = new Scanner(System.in);
-    private static ArrayList<AdminMain> mainAdmin =  new ArrayList<>();
-    private static ArrayList<Company> company = new ArrayList<>();
-    private static ArrayList<Internship> internships = new ArrayList<>();
-    private static ArrayList<School> school = new ArrayList<>();
-    private static ArrayList<StudentIntern> stInterns = new ArrayList<>();
-    private static ArrayList<Task> task = new ArrayList<>();
+    private static final Scanner input = new Scanner(System.in);
+    private static final ArrayList<AdminMain> mainAdmin =  new ArrayList<>();
+    private static final ArrayList<Company> company = new ArrayList<>();
+    private static final ArrayList<Internship> internships = new ArrayList<>();
+    private static final ArrayList<School> school = new ArrayList<>();
+    private static final ArrayList<StudentIntern> stInterns = new ArrayList<>();
+    private static final ArrayList<Task> task = new ArrayList<>();
     private static final String studentRegex = "^\\d{2}-\\d{5}@g\\.batstate-u\\.edu\\.ph$";
     private static final String companyRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|org|net|co\\.[a-z]{2,})$";
     private static final String schoolRegex = "^[a-zA-Z][a-zA-Z0-9._-]*@g\\.batstate-u\\.edu\\.ph$";
@@ -29,25 +29,7 @@ public class PraxisFlowMain {
                 break;
                 case 2: userRegisterMenu();
                 break;
-                case 3: createInternshipMenu();
-                break;
-                case 4: establishPartnerShip();;
-                break;
-                case 5: recommendInternshipToSchoolMenu();
-                break;
-                case 6: assignTaskToInternMenu();
-                break;
-                case 7: logHours();
-                break;
-                case 8: submitEvalToInternMenu();
-                break;
-                case 9: viewAllUser();
-                break;
-                case 10: viewALlInternships();
-                break;
-                case 11: viewPartnershipsMenu();
-                break;
-                case 12:
+                case 3:
                     System.out.println();
                     System.out.println("Thank you for using the Praxis Flow System!");
                     isItRunning = false;
@@ -205,118 +187,153 @@ public class PraxisFlowMain {
     }
 
     //method for the user role menu
-    private static void userRoleMenu(User user){
+    private static void userRoleMenu(User user) {
         boolean inSession = true;
 
-        //For the admin main
-        if(user instanceof AdminMain) {
-            System.out.println("1. Approve Internship");
-            System.out.println("2. View Dashboard");
-            System.out.println("3. Logout");
+        while (inSession) {
+            //For the admin main
+            if (user instanceof AdminMain) {
+                System.out.println("1. Approve Internship");
+                System.out.println("2. View Dashboard");
+                System.out.println("3. View All Internships");
+                System.out.println("4. View All Partnerships");
+                System.out.println("5. View All User");
+                System.out.println("6. Logout");
 
-            int choice = getInputInteger("Enter choice(1-3): ");
-            switch (choice) {
-                case 1:
-                    approveInternshipMenu((AdminMain) user);
-                    break;
-                case 2:
-                    user.displayView();
-                    break;
-                case 3:
-                    user.logOut();
-                    inSession = false;
-                    break;
-                default:
-                    System.out.println("Invalid input please enter a number between (1-3)\n");
+                int choice = getInputInteger("Enter choice(1-6): ");
+                switch (choice) {
+                    case 1: approveInternshipMenu((AdminMain) user);
+                        break;
+                    case 2: user.displayView();
+                        break;
+                    case 3: viewALlInternships();
+                        break;
+                    case 4: viewPartnershipsMenu();
+                        break;
+                    case 5: viewAllUser();
+                        break;
+                    case 6:
+                        user.logOut();
+                        inSession = false;
+                        break;
+                    default:
+                        System.out.println("Invalid input please enter a number between (1-6)\n");
+
+                }
             }
-        }
 
             //For the School
-            else if(user instanceof School){
-            System.out.println("1. Add Partner Company");
-            System.out.println("2. View Internship Recommendation");
-            System.out.println("3. Monitor Progress");
-            System.out.println("4. Recommend Student");
-            System.out.println("5. View Dashboard");
-            System.out.println("6. Logout");
+            else if (user instanceof School schoolCoordinator) {
+                System.out.println("1. Add Partner Company");
+                System.out.println("2. View Internship Recommendation");
+                System.out.println("3. Monitor Progress");
+                System.out.println("4. Recommend Student");
+                System.out.println("5. View Dashboard");
+                System.out.println("6. Established Partnership");
+                System.out.println("7. Logout");
 
-            int choice = getInputInteger("Enter your choice(1-6): ");
-            School school = (School) user;
-            switch(choice){
-                case 1: addPartnerCompanyMenu(school);
-                break;
-                case 2: school.viewInternshipRecommendation();
-                break;
-                case 3: recommendStudentMenu(school);
-                break;
-                case 4: monitorProgressMenu(school);
-                break;
-                case 5: user.displayView();
-                break;
-                case 6: user.logOut();
-                inSession = false;
-                break;
-                default:
-                    System.out.println("Invalid input please enter a number between (1-6)\n");
-            }
+                int choice = getInputInteger("Enter your choice(1-7): ");
+                switch (choice) {
+                    case 1:
+                        addPartnerCompanyMenu(schoolCoordinator);
+                        break;
+                    case 2:
+                        schoolCoordinator.viewInternshipRecommendation();
+                        break;
+                    case 3:
+                        monitorProgressMenu(schoolCoordinator);
+                        break;
+                    case 4:
+                        recommendStudentMenu(schoolCoordinator);
+                        break;
+                    case 5:
+                        user.displayView();
+                        break;
+                    case 6: establishPartnershipS();
+                        break;
+                    case 7:
+                        user.logOut();
+                        inSession = false;
+                        break;
+                    default:
+                        System.out.println("Invalid input please enter a number between (1-7)\n");
+                }
             }
 
             //For the Company
-            else if(user instanceof Company){
-            System.out.println("1. Add Partner School: ");
-            System.out.println("2. Recommended Internship to School");
-            System.out.println("3. Assign Task");
-            System.out.println("4. Submit Evaluation");
-            System.out.println("5. View Dashboard");
-            System.out.println("6. Logout");
+            else if (user instanceof Company mentor) {
+                System.out.println("1. Add Partner School: ");
+                System.out.println("2. Recommended Internship to School");
+                System.out.println("3. Assign Task");
+                System.out.println("4. Submit Evaluation");
+                System.out.println("5. View Dashboard");
+                System.out.println("6. Establish ");
+                System.out.println("7. Logout");
 
-            int choice = getInputInteger("Enter a number(1-6): ");
-            Company mentor = (Company) user;
-            switch(choice){
-                case 1: addPartnerSchoolMenu(mentor);
-                break;
-                case 2: recommendInternshipToSchoolByMentorOrSupervisor(mentor);
-                break;
-                case 3: assignTaskToInternMenu();
-                break;
-                case 4: submitEvalToInternMenu();
-                break;
-                case 5: user.displayView();
-                break;
-                case 6: user.logOut();
-                inSession = false;
-                break;
-                default:
-                    System.out.println("Invalid input please enter a number between (1-6)\n");
+                int choice = getInputInteger("Enter a number(1-7): ");
+                switch (choice) {
+                    case 1:
+                        addPartnerSchoolMenu(mentor);
+                        break;
+                    case 2:
+                        recommendInternshipToSchoolMenu();
+                        break;
+                    case 3:
+                        assignTaskToInternMenu();
+                        break;
+                    case 4:
+                        submitEvalToInternMenu();
+                        break;
+                    case 5:
+                        user.displayView();
+                        break;
+                    case 6: establishPartnerShipC();
+                        break;
+                    case 7:
+                        user.logOut();
+                        inSession = false;
+                        break;
+                    default:
+                        System.out.println("Invalid input please enter a number between (1-7)\n");
+                }
             }
-        }
 
             //For the Student Intern
-            else if(user instanceof StudentIntern){
-            System.out.println("1. Log Hours");
-            System.out.println("2. Complete Task");
-            System.out.println("3. View Timesheet");
-            System.out.println("4. View Dashboard");
-            System.out.println("5. Logout");
+            else if (user instanceof StudentIntern) {
+                System.out.println("1. Log Hours");
+                System.out.println("2. Complete Task");
+                System.out.println("3. View Timesheet");
+                System.out.println("4. View Dashboard");
+                System.out.println("5. Create Internship");
+                System.out.println("6. Logout");
 
-            int choice = getInputInteger("Enter a number(1-5): ");
-            switch (choice){
-                case 1: logHoursForStudentIntern((StudentIntern) user);
-                break;
-                case 2: completeTaskMenu((StudentIntern) user);
-                break;
-                case 3: ((StudentIntern) user).viewTimesheet();;
-                break;
-                case 4: user.displayView();;
-                break;
-                case 5: user.logOut();
-                inSession = false;
-                default:
-                    System.out.println("Invalid input please enter a number between 1-5\n");
+                int choice = getInputInteger("Enter a number(1-6): ");
+                switch (choice) {
+                    case 1:
+                        logHoursForStudentIntern((StudentIntern) user);
+                        break;
+                    case 2:
+                        completeTaskMenu((StudentIntern) user);
+                        break;
+                    case 3:
+                        ((StudentIntern) user).viewTimesheet();
+                        break;
+                    case 4:
+                        user.displayView();
+                        break;
+                    case 5: createInternshipMenu();
+                    break;
+                    case 6:
+                        user.logOut();
+                        inSession = false;
+                    default:
+                        System.out.println("Invalid input please enter a number between 1-6\n");
+                }
             }
-        }
 
+        }
     }
+
 
     //method for the display and the input location in the creation of internship
     private static void createInternshipMenu(){
@@ -337,53 +354,45 @@ public class PraxisFlowMain {
     }
 
     //method for the establishment of partnership to school
-    private static void establishPartnerShip(){
+    private static void establishPartnerShipC(){
+        if (company.isEmpty()){
+            System.out.println("No company mentors and supervisor available.");
+            return;
+        }
+
+        System.out.println("\nCompany Mentors/Supervisor:");
+        for(int i = 0; i < company.size(); i++){
+            System.out.println((i + 1) + "." + company.get(i).getName() + " - " + company.get(i).getCompanyName());
+        }
+        int companyMentorIndex = getInputInteger("Select a mentor/supervisor: ") - 1;
+
+        if(companyMentorIndex >= 0 && companyMentorIndex < company.size()){
+            System.out.print("Enter partner school name: ");
+            String schoolName = input.nextLine();
+            company.get(companyMentorIndex).addPartnerSchool(schoolName);
+        }
+    }
+
+    //method for the establishment of partnership to company
+    private static void establishPartnershipS(){
+        if(school.isEmpty()){
+            System.out.println("Their is no school coordinators available at the moment.");
+            return;
+        }
+
         System.out.println();
-        System.out.println("=============================================");
-        System.out.println("Establish Partnership");
-        System.out.println("=============================================");
-        System.out.println("1. Company adds Partner School");
-        System.out.println("2. School adds Partner Company");
-
-        int choice = getInputInteger("Enter a number(1-2): ");
-
-        if(choice == 1){
-            if (company.isEmpty()){
-                System.out.println("No company mentors and supervisor available.");
-                return;
-            }
-
-            System.out.println("\nCompany Mentors/Supervisor:");
-            for(int i = 0; i < company.size(); i++){
-                System.out.println((i + 1) + "." + company.get(i).getName() + " - " + company.get(i).getCompanyName());
-            }
-            int companyMentorIndex = getInputInteger("Select a mentor/supervisor: ") - 1;
-
-            if(companyMentorIndex >= 0 && companyMentorIndex < company.size()){
-                System.out.print("Enter partner school name: ");
-                String schoolName = input.nextLine();
-                company.get(companyMentorIndex).addPartnerSchool(schoolName);
-            }
+        System.out.println("School Coordinators:");
+        for(int i = 0; i < school.size(); i++){
+            System.out.println((i+1) + ". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
         }
-        else if (choice == 2){
-            if(school.isEmpty()){
-                System.out.println("Their is no school coordinators available at the moment.");
-                return;
-            }
+        int scIndex = getInputInteger("Select a School Coordinator: ") - 1;
 
-            System.out.println();
-            System.out.println("School Coordinators:");
-            for(int i = 0; i < school.size(); i++){
-                System.out.println((i+1) + ". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
-            }
-            int scIndex = getInputInteger("Select a School Coordinator: ") - 1;
-
-            if(scIndex >= 0 && scIndex < school.size()){
-                System.out.print("Enter partner company name: ");
-                String companyName = input.nextLine();
-                school.get(scIndex).addPartnerCompany(companyName);
-            }
+        if(scIndex >= 0 && scIndex < school.size()){
+            System.out.print("Enter partner company name: ");
+            String companyName = input.nextLine();
+            school.get(scIndex).addPartnerCompany(companyName);
         }
+
     }
 
     //method for the recommendation of internship
@@ -439,31 +448,6 @@ public class PraxisFlowMain {
         school.addPartnerCompany(companyName);
     }
 
-    private static void recommendInternshipToSchoolByMentorOrSupervisor(Company company){
-        if(internships.isEmpty() || school.isEmpty()){
-            System.out.println("Need internships and school coordinators in system.");
-            return;
-        }
-
-        System.out.println();
-        System.out.print("Available Internship: ");
-        for(int i = 0 ; i < internships.size(); i++){
-            System.out.println((i + 1) + ". " + internships.get(i));
-        }
-        int internIndex = getInputInteger("Select internship: ") - 1;
-
-        System.out.println();
-        System.out.print("School Coordinators: ");
-        for(int i = 0; i < school.size(); i++){
-            System.out.println((i + 1) + ". " + school.get(i).getName() + " - " + school.get(i).getSchoolName());
-        }
-        int scIndex = getInputInteger("Select a school: ");
-
-        if(internIndex >= 0 && internIndex < internships.size() && scIndex >= 0 && school.size() > scIndex){
-            company.recommendInternshipToSchool(internships.get(internIndex), school.get(scIndex));
-        }
-    }
-
     //method for the assigning of task
     private static void assignTaskToInternMenu(){
         if(stInterns.isEmpty()){
@@ -498,31 +482,6 @@ public class PraxisFlowMain {
         }
         else{
             System.out.println("Invalid input, Please try again.");
-        }
-    }
-
-    //method for the log hours menu
-    private static void logHours(){
-        if(stInterns.isEmpty()){
-            System.out.println("No interns are currently available.");
-            return;
-        }
-
-        System.out.println();
-        System.out.println("=============================================");
-        System.out.println("Log Hours Menu");
-        System.out.println("=============================================");
-        System.out.println("Available Interns: ");
-        for (int i =0; i < stInterns.size(); i++){
-            System.out.println((i + 1) + ". " + stInterns.get(i).getName());
-        }
-
-        int stInternIndex = getInputInteger("Select Intern Number: ");
-        if(stInternIndex >= 0 && stInternIndex < stInterns.size()){
-            logHoursForStudentIntern(stInterns.get(stInternIndex));
-        }
-        else{
-            System.out.println("Invalid selection.");
         }
     }
 
@@ -600,7 +559,7 @@ public class PraxisFlowMain {
         }
 
         System.out.println();
-        System.out.println("Student Interns:");;
+        System.out.println("Student Interns:");
         for(int i = 0; i <  stInterns.size(); i++){
             System.out.println((i + 1) + ". " + stInterns.get(i).getName());
         }
@@ -741,16 +700,7 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
         System.out.println("1. Login");
         System.out.println("2. Register New User");
-        System.out.println("3. Create Internship");
-        System.out.println("4. Establish Partnership (School <-> Company)");
-        System.out.println("5. Recommend Internship to School (Sister Company)");
-        System.out.println("6. Assign Task to Intern");
-        System.out.println("7. Log Hours (Intern)");
-        System.out.println("8. Submit Evaluation");
-        System.out.println("9. View All User");
-        System.out.println("10. View All Internships");
-        System.out.println("11. View All Partnerships");
-        System.out.println("12. Exit");
+        System.out.println("3. Exit");
         System.out.println("=============================================");
     }
 
@@ -763,7 +713,7 @@ public class PraxisFlowMain {
         }
         catch(NumberFormatException e){
             System.out.println("Invalid input. Please enter a number.");
-            return -1;
+            return - 1;
         }
     }
 }

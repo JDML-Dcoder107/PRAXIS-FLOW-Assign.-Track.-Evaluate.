@@ -7,7 +7,7 @@ public class School extends User{
     private ArrayList<Internship> receivedInternsRecommendation;
 
     //constructor
-    public School(String srCode, String name, String email, String password, String role){
+    public School(String srCode, String name, String email, String password, String schoolName){
         super(srCode, name, email, password, "School Coordinator");
         this.schoolName = schoolName;
         this.levelOfRecommendation = 0;
@@ -60,10 +60,7 @@ public class School extends User{
             partnerCompanies.add(companyName);
             System.out.println(companyName + " is added as partner of " + schoolName);
         }
-        catch(NullPointerException e){
-            System.out.println("Error has been occurred: " + e.getMessage());
-        }
-        catch(IllegalArgumentException e){
+        catch(NullPointerException | IllegalArgumentException e){
             System.out.println("Error has been occurred: " + e.getMessage());
         }
     }

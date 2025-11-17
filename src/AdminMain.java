@@ -49,7 +49,7 @@ public class AdminMain extends User {
     }
 
     //method for the management of user
-    public void manageUser(User user){
+    public void manageUser(AdminMain user){
         System.out.println("Managing user: " + user.getName() + " - " + user.getRole());
     }
 }

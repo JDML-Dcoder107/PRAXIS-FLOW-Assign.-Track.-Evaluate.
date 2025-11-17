@@ -10,7 +10,6 @@ public class Company extends User implements Evaluate{
     //constructor
     public Company(String srCode, String name, String email, String password, String role){
         super(srCode, name, email, password, "Company Coordinator");
-            this.companyName = companyName;
             this.taskAssigned = 0;
             this.partnerSchools = new ArrayList<>();
             this.levelOfRecommendation = 0;
