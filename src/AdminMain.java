@@ -3,7 +3,7 @@ public class AdminMain extends User {
     private int totalUser;
 
     //constructor
-    public AdminMain(String srCode, String name, String email, String password, String role){
+    public AdminMain(String srCode, String name, String email, String password){
         super(srCode, name, email, password, "Administrator");
             this.totalUser = 0;
 

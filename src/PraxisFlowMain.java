@@ -20,25 +20,45 @@ public class PraxisFlowMain {
         System.out.println("Praxis Flow");
         System.out.println("Assign, Track, Evaluate");
         System.out.println("=============================================");
-        System.out.println("1. Login");
-        System.out.println("2. Register");
-        System.out.println("3. Exit");
-        System.out.println("=============================================");
+
         while(isItRunning){
             int choice = getInputInteger("Enter your choice here: ");
-
+            mainMenu();
             switch(choice){
                 case 1: userLoginMenu();
                 break;
                 case 2: userRegisterMenu();
                 break;
-                case 3: System.out.println("\nThank you for using Praxis Flow.");
+                case 3: createInternshipMenu();
+                break;
+                case 4: establishPartnerShip();;
+                break;
+                case 5: recommendInternshipToSchoolMenu();
+                break;
+                case 6: assignTaskToInternMenu();
+                break;
+                case 7: logHoursForStudentIntern();
+                break;
+                case 8: submitEvalToInternMenu();
+                break;
+                case 9: viewAllUser();
+                break;
+                case 10: viewALlInternships();
+                break;
+                case 11: viewPartnershipsMenu();
+                break;
+                case 12:
+                    System.out.println();
+                    System.out.println("Thank you for using the Praxis Flow System!");
                     isItRunning = false;
                     break;
                 default: System.out.println("Invalid input please input a number between 1 - 3. \n");
             }
         }
+        input.close();
     }
+
+    //method for the input of double value
     private static double getInputDouble (){
         try{
             double value = Double.parseDouble(input.nextLine());
@@ -69,18 +89,63 @@ public class PraxisFlowMain {
             String password = input.nextLine();
             System.out.print("Confirm Password: ");
             String confirmPassword = input.nextLine();
-            System.out.print("Enter SrCode: ");
-            String srCode = input.nextLine();
-            System.out.print("Enter School: ");
-            String schoolName = input.nextLine();
-
             if(password.equals(confirmPassword)){
+                System.out.print("Enter SrCode: ");
+                String srCode = input.nextLine();
+                System.out.print("Enter School: ");
+                String schoolName = input.nextLine();
                 stInterns.add(new StudentIntern(userID, name, email, password, srCode, schoolName));
-                System.out.println("Student Intern Registration Successful!");
+                System.out.println("Student Intern Registration Complete!");
             }
             else{
                 System.out.println("Password do not match to each other. Try again");
             }
+        }
+        else if(email.matches(schoolRegex)){
+            System.out.print("Enter Password: ");
+            String password = input.nextLine();
+            System.out.print("Confirm Password: ");
+            String confirmPassword = input.nextLine();
+            if(password.equals(confirmPassword)) {
+                System.out.print("Enter School: ");
+                String schoolName = input.nextLine();
+                school.add(new School(userID, name, email, password, schoolName));
+                System.out.println("School Coordinator Registration Complete!");
+            }
+            else{
+                System.out.println("Password do not match to each other. Try again");
+            }
+        }
+        else if(email.matches(companyRegex)){
+            System.out.print("Enter Password: ");
+            String password = input.nextLine();
+            System.out.print("Confirm Password: ");
+            String confirmPassword = input.nextLine();
+            if(password.equals(confirmPassword)){
+                System.out.print("Enter Company: ");
+                String companyName = input.nextLine();
+                company.add(new Company(userID, name, email, password, companyName));
+                System.out.println("Company Mentor/Supervisor Registration Complete!");
+            }
+            else{
+                System.out.println("Password do not match to each other. Try again");
+            }
+        }
+        else if(email.matches(adminRegex)){
+            System.out.print("Enter Password: ");
+            String password = input.nextLine();
+            System.out.print("Confirm Password: ");
+            String confirmPassword = input.nextLine();
+            if(password.equals(confirmPassword)){
+                mainAdmin.add(new AdminMain(userID, name, email, password));
+                System.out.println("Administrator Registration Complete!");
+            }
+            else{
+                System.out.println("Password do not match to each other. Try again");
+            }
+        }
+        else{
+            System.out.println("No valid role matches your email.");
         }
 
 
@@ -184,7 +249,7 @@ public class PraxisFlowMain {
                 break;
                 case 3: recommendStudentMenu(school);
                 break;
-                case 4: monitorProgesMenu(school);
+                case 4: monitorProgressMenu(school);
                 break;
                 case 5: user.displayView();
                 break;
@@ -530,7 +595,7 @@ public class PraxisFlowMain {
     }
 
     //method for the progress view
-    private static void monitorProgesMenu(School school){
+    private static void monitorProgressMenu(School school){
         if(stInterns.isEmpty()){
             System.out.println("No interns to monitor to be found.");
             return;
@@ -644,51 +709,27 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
     }
     //method for the students main menu
-    private static void studentMainMenu(){
+    private static void mainMenu(){
         System.out.println();
         System.out.println("=============================================");
-        System.out.println("Student Main Menu");
+        System.out.println("Main Menu");
         System.out.println("=============================================");
-        System.out.println("1. Create Internship");
-        System.out.println("2. Log Hours");
+        System.out.println("1. Login");
+        System.out.println("2. Register New User");
+        System.out.println("3. Create Internship");
+        System.out.println("4. Establish Partnership (School <-> Company)");
+        System.out.println("5. Recommend Internship to School (Sister Company)");
+        System.out.println("6. Assign Task to Intern");
+        System.out.println("7. Log Hours (Intern)");
+        System.out.println("8. Submit Evaluation");
+        System.out.println("9. View All User");
+        System.out.println("10. View All Internships");
+        System.out.println("11. View All Partnerships");
+        System.out.println("12. Exit");
         System.out.println("=============================================");
     }
 
-    //method for the company main menu
-    private static void companyMainMenu(){
-        System.out.println();
-        System.out.println("=============================================");
-        System.out.println("Company Main Menu");
-        System.out.println("=============================================");
-        System.out.println("1. Recommend Internship to School");
-        System.out.println("2. Assign Task to Intern's");
-        System.out.println("3. Submit Evaluation");
-        System.out.println("4. View all Partnership");
-        System.out.println("=============================================");
-    }
-
-    //method for the school main menu
-    private static void schoolMainMenu(){
-        System.out.println();
-        System.out.println("=============================================");
-        System.out.println("School Main Menu");
-        System.out.println("=============================================");
-        System.out.println("1. Establish Partnership");
-        System.out.println("2. View all Internship");
-        System.out.println("=============================================");
-    }
-
-    //method for the main admin main menu
-    private static void adminMainMenu(){
-        System.out.println();
-        System.out.println("=============================================");
-        System.out.println("Administrator Main Menu");
-        System.out.println("=============================================");
-        System.out.println("1. View all Intern's");
-        System.out.println("2. View all Partnership's");
-        System.out.println("=============================================");
-    }
-
+    //method for the input of integer value
     private static int getInputInteger (String integer){
         System.out.print(integer);
         try {
