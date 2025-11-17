@@ -22,8 +22,8 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
 
         while(isItRunning){
-            int choice = getInputInteger("Enter your choice here: ");
             mainMenu();
+            int choice = getInputInteger("Enter your choice here: ");
             switch(choice){
                 case 1: userLoginMenu();
                 break;
@@ -37,7 +37,7 @@ public class PraxisFlowMain {
                 break;
                 case 6: assignTaskToInternMenu();
                 break;
-                case 7: logHoursForStudentIntern();
+                case 7: logHours();
                 break;
                 case 8: submitEvalToInternMenu();
                 break;
@@ -277,9 +277,9 @@ public class PraxisFlowMain {
                 break;
                 case 2: recommendInternshipToSchoolByMentorOrSupervisor(mentor);
                 break;
-                case 3: assignTaskToInternMenu(mentor);
+                case 3: assignTaskToInternMenu();
                 break;
-                case 4: submitEvalToInternMenu(mentor);
+                case 4: submitEvalToInternMenu();
                 break;
                 case 5: user.displayView();
                 break;
@@ -465,7 +465,7 @@ public class PraxisFlowMain {
     }
 
     //method for the assigning of task
-    private static void assignTaskToInternMenu(Company mentor){
+    private static void assignTaskToInternMenu(){
         if(stInterns.isEmpty()){
             System.out.println("No interns available at the moment.");
             return;
@@ -501,6 +501,31 @@ public class PraxisFlowMain {
         }
     }
 
+    //method for the log hours menu
+    private static void logHours(){
+        if(stInterns.isEmpty()){
+            System.out.println("No interns are currently available.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("Log Hours Menu");
+        System.out.println("=============================================");
+        System.out.println("Available Interns: ");
+        for (int i =0; i < stInterns.size(); i++){
+            System.out.println((i + 1) + ". " + stInterns.get(i).getName());
+        }
+
+        int stInternIndex = getInputInteger("Select Intern Number: ");
+        if(stInternIndex >= 0 && stInternIndex < stInterns.size()){
+            logHoursForStudentIntern(stInterns.get(stInternIndex));
+        }
+        else{
+            System.out.println("Invalid selection.");
+        }
+    }
+
     //method for the log hours for the interns
     private static void logHoursForStudentIntern(StudentIntern studentIntern){
         System.out.print("Enter hours worked: ");
@@ -511,7 +536,7 @@ public class PraxisFlowMain {
         studentIntern.loginData(hours, date);
     }
 
-    private static void submitEvalToInternMenu(Company mentor){
+    private static void submitEvalToInternMenu(){
         if(stInterns.isEmpty() || company.isEmpty()){
             System.out.println("Invalid!! the system need both interns and company mentors.");
             return;
