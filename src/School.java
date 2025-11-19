@@ -7,8 +7,8 @@ public class School extends User{
     private ArrayList<Internship> receivedInternsRecommendation;
 
     //constructor
-    public School(String srCode, String name, String email, String password, String schoolName){
-        super(srCode, name, email, password, "School Coordinator");
+    public School(String userID, String name, String email, String password, String schoolName){
+        super(userID, name, email, password, "School Coordinator");
         this.schoolName = schoolName;
         this.levelOfRecommendation = 0;
         this.partnerCompanies = new ArrayList<>();
@@ -60,12 +60,12 @@ public class School extends User{
             partnerCompanies.add(companyName);
             System.out.println(companyName + " is added as partner of " + schoolName);
         }
-        catch(NullPointerException | IllegalArgumentException e){
+        catch(NullPointerException | IllegalStateException e){
             System.out.println("Error has been occurred: " + e.getMessage());
         }
     }
     //receiving of internship recommendation from the sister companies
-    public void receivedInternsRecommendation(Internship intern, String companyName){
+    public void receiveInternshipRecommendation(Internship intern, String companyName){
         try {
             if(intern == null){
                throw new NullPointerException("This section should not be left null or blank");
@@ -78,7 +78,7 @@ public class School extends User{
             System.out.println("Status Available for student recommendation");
         }
         catch(NullPointerException e){
-            System.out.println("Error has been occurred: " + e.getMessage());
+            System.out.println("Error has occurred: " + e.getMessage());
         }
         catch(Exception e){
             System.out.println("Error has been found during the process: " + e.getMessage());
@@ -88,9 +88,9 @@ public class School extends User{
 
     public void viewInternshipRecommendation(){
         System.out.println();
-        System.out.println("===========================================");
-        System.out.println("||       Internship Recommendation       ||");
-        System.out.println("===========================================");
+        System.out.println("=============================================");
+        System.out.println("||        Internship Recommendation        ||");
+        System.out.println("=============================================");
         if(receivedInternsRecommendation.isEmpty()){
             System.out.println("No internship recommendation received yet.");
         }
@@ -99,25 +99,25 @@ public class School extends User{
                 System.out.println((i + 1) + ". " + receivedInternsRecommendation.get(i));
             }
         }
-        System.out.println("===========================================");
+        System.out.println("=============================================");
     }
 
     //Override the displayView method from the abstract class
     @Override
     public void displayView(){
         System.out.println();
-        System.out.println("===========================================");
-        System.out.println("||           School Coordinator           ||");
-        System.out.println("===========================================");
+        System.out.println("=============================================");
+        System.out.println("||           School Coordinator            ||");
+        System.out.println("=============================================");
         System.out.println("Name: " + getName());
         System.out.println("School: " + schoolName);
         System.out.println("Students Recommendation: " + levelOfRecommendation);
         System.out.println("Partner/Sister Companies: " + partnerCompanies.size());
-        if(partnerCompanies.isEmpty()){
+        if(!partnerCompanies.isEmpty()){
             System.out.println("Partners: " + String.join(", ", partnerCompanies));
         }
         System.out.println("Internship Recommendation Received: " + receivedInternsRecommendation.size());
-        System.out.println("===========================================");
+        System.out.println("=============================================");
     }
 
     //Student recommendation for internship
@@ -128,6 +128,7 @@ public class School extends User{
             }
 
             intern.setIntern(studentIntern);
+            studentIntern.setStatus("Active");
             levelOfRecommendation++;
             System.out.println("School " + getName() + " recommended " + studentIntern.getName() + " for internship at " + intern.getCompanyName());
         }

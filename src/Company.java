@@ -8,8 +8,9 @@ public class Company extends User implements Evaluate{
     private int levelOfRecommendation;
 
     //constructor
-    public Company(String srCode, String name, String email, String password, String role){
-        super(srCode, name, email, password, "Company Coordinator");
+    public Company(String userID, String name, String email, String password, String companyName){
+        super(userID, name, email, password, "Company Mentor/Supervisor");
+            this.companyName = companyName;
             this.taskAssigned = 0;
             this.partnerSchools = new ArrayList<>();
             this.levelOfRecommendation = 0;
@@ -63,7 +64,7 @@ public class Company extends User implements Evaluate{
             System.out.println("Error has been occurred: " + e.getMessage());
         }
         catch(Exception e){
-            System.out.println("Their is an unexpected error occurred during the process: " + e.getMessage());
+            System.out.println("Their was an unexpected error during the process: " + e.getMessage());
         }
     }
 
@@ -81,7 +82,7 @@ public class Company extends User implements Evaluate{
             }
 
             //Sends recommendation to the school
-            admin.receivedInternsRecommendation(internship, this.companyName);
+            admin.receiveInternshipRecommendation(internship, this.companyName);
             levelOfRecommendation++;
 
             System.out.println("Company " + companyName + " recommended internship to " + admin.getSchoolName());
@@ -100,15 +101,15 @@ public class Company extends User implements Evaluate{
     @Override
     public void displayView(){
         System.out.println();
-        System.out.println("===========================================");
-        System.out.println("||       Company Mentor/Supervisor       ||");
-        System.out.println("===========================================");
+        System.out.println("=============================================");
+        System.out.println("||        Company Mentor/Supervisor        ||");
+        System.out.println("=============================================");
         System.out.println("Name: " + getName());
         System.out.println("Company: " + companyName);
         System.out.println("Task Assigned: " + taskAssigned);
         System.out.println("Partner/Sister Schools: " + partnerSchools.size());
         if(!partnerSchools.isEmpty()){
-            System.out.println("Partners: " + String.join(", " + partnerSchools));
+            System.out.println("Partners: " + String.join(", ", partnerSchools));
         }
         System.out.println("Internships Recommended to Schools: " + levelOfRecommendation);
         System.out.println("===========================================");
@@ -131,6 +132,7 @@ public class Company extends User implements Evaluate{
         catch(Exception e){
             System.out.println("Unexpected error occurred: " + e.getMessage());
         }
+        System.out.println("=============================================");
     }
 
     //Override the submit evaluation

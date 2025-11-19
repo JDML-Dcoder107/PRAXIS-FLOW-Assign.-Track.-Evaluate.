@@ -3,8 +3,8 @@ public class AdminMain extends User {
     private int totalUser;
 
     //constructor
-    public AdminMain(String srCode, String name, String email, String password){
-        super(srCode, name, email, password, "Administrator");
+    public AdminMain(String userID, String name, String email, String password){
+        super(userID, name, email, password, "Administrator");
             this.totalUser = 0;
 
     }
@@ -22,9 +22,9 @@ public class AdminMain extends User {
     //Override the display view method from the abstract class
     @Override
     public void displayView(){
-        System.out.println("======================");
-        System.out.println("|| Main Admin ||");
-        System.out.println("======================");
+        System.out.println("=============================================");
+        System.out.println("||               Main Admin                ||");
+        System.out.println("=============================================");
         System.out.println("Name: " + getName());
         System.out.println("Email: " + getEmail());
         System.out.println("Total number of user currently managing: " + totalUser);
@@ -50,13 +50,15 @@ public class AdminMain extends User {
           System.out.println("Administrator: " + getName() + " approved internship of internshipID: " + internship.getInternshipId());
           System.out.println("Student: " + stIntern.getName() + " status updated to: Active");
           System.out.println("Position: " + internship.getPosition() + " at " + internship.getCompanyName());
+
       }
-      catch (NullPointerException e){
+      catch (NullPointerException | IllegalStateException e){
           System.out.println("Error occurred: " + e.getMessage());
       }
       catch (Exception e){
           System.out.println("Unexpected error occurred while approving the internship: " + e.getMessage());
       }
+      System.out.println("=============================================");
     }
 
     //Rejecting method of internship
@@ -79,7 +81,7 @@ public class AdminMain extends User {
             System.out.println("Reason: " + reason);
         }
         catch (NullPointerException | IllegalStateException e){
-            System.out.println("Error has been occurred: " + e.getMessage());
+            System.out.println("Error occurred: " + e.getMessage());
         }
         catch (Exception e){
             System.out.println("Unexpected error: " + e.getMessage());
@@ -87,7 +89,7 @@ public class AdminMain extends User {
     }
 
     //method for the management of user
-    public void manageUser(AdminMain user){
+    public void manageUser(User user){
         System.out.println("Managing user: " + user.getName() + " - " + user.getRole());
     }
 }

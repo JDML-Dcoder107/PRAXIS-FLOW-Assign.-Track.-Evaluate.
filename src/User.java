@@ -1,15 +1,15 @@
 //Abstract Class
 abstract class User{
 //Encapsulation
-    private String srCode;
+    private String userID;
     private String name;
     private String email;
     private String password;
     private String role;
 
     //Constructor
-    public User(String srCode, String name, String email, String password, String role){
-        this.srCode = srCode;
+    public User(String userID, String name, String email, String password, String role){
+        this.userID = userID;
         this.name = name;
         this.email = email;
         this.password = password;
@@ -17,13 +17,13 @@ abstract class User{
     }
 
     //getter of SrCode
-    public String getSrCode(){
-        return srCode;
+    public String getUserID(){
+        return getUserID();
     }
 
     //setter for SrCode
-    public void setSrCode(String srCode){
-        this.srCode = srCode;
+    public void setUserID(String userID){
+        this.userID = userID;
     }
 
     //getter of Name
@@ -48,7 +48,7 @@ abstract class User{
 
     //getter of password
     public String getPassword(){
-        return password = password;
+        return password;
     }
 
     //setter of password

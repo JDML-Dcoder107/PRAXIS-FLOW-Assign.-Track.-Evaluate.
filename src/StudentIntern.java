@@ -10,12 +10,23 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     private Evaluation evaluation;
 
     //constructor
-    public StudentIntern(String srCode, String name, String email, String password, String role, String schoolName){
+    public StudentIntern(String srCode, String name, String email, String password, String schoolName){
         super(srCode, name, email, password, "Student Intern");
         this.srCode = srCode;
+        this.school = schoolName;
         this.status = "Inactive";
         this.taskLog = new ArrayList<>();
         this.timeLogs = new ArrayList<>();
+    }
+
+    //getter of srCode
+    public String getSrCode(){
+        return srCode;
+    }
+
+    //setter of srCode
+    public void setSrCode(String srCode){
+        this.srCode = srCode;
     }
 
     //getters of school
@@ -42,9 +53,9 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     @Override
     public void displayView(){
         System.out.println();
-        System.out.println("================================");
-        System.out.println("||      Intern Dashboard      ||");
-        System.out.println("================================");
+        System.out.println("=============================================");
+        System.out.println("||            Intern Dashboard             ||");
+        System.out.println("=============================================");
         System.out.println();
         System.out.println("Name: " + getName());
         System.out.println("Sr-Code: " + getSrCode());
@@ -54,13 +65,13 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         if(evaluation != null){
             System.out.println("Evaluation Score: " + evaluation.getScore() + "/5");
         }
-        System.out.println("=======================================================");
+        System.out.println("=============================================");
     }
 
     //methods for the interns assigned task.
     public void receiveTask(Task task){
         taskLog.add(task);
-        System.out.println("Inter " + getName() + " receive task " + task.getTaskName());
+        System.out.println("Intern " + getName() + " receive task " + task.getTaskName());
     }
     public void completeTask(Task task){
         try{
@@ -84,7 +95,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     //Override(Polymorphism) from the abstract interface
     @Override
     //for login hours
-    public void loginData(double hours, String date){
+    public void logData(double hours, String date){
         try {
             if (hours <= 0 || hours > 24) {
                 throw new IllegalArgumentException("Invalid value of hours.\nThe value of Hours should be between 0 and 24 only.");
@@ -118,7 +129,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
             }
             System.out.println("Total Hours: " + getTotalHours());
         }
-        System.out.println("====================================================");
+        System.out.println("=============================================");
     }
 
     //getter of the total hours
@@ -140,7 +151,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     public double viewEvaluationScore(){
         if(evaluation != null){
             System.out.println("Your evaluation result is: " + evaluation.getScore() + "/5");
-            if(evaluation.getScore() < 4 && evaluation.getScore() > 0 ){
+            if(evaluation.getScore() <= 3 && evaluation.getScore() > 0 ){
                 System.out.println("Congratulation you have passed the internship!!");
             }
             else{
@@ -148,6 +159,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
             }
             return evaluation.getScore();
         }
+        System.out.println("No evaluation available yet");
         return 0;
     }
 }

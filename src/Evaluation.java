@@ -68,6 +68,6 @@ public class Evaluation {
     //Override in toString
     @Override
     public String toString(){
-        return "Evaluation for " + internsName + "\nScore: " + score + "/5\nFeedback: " + feedback + "\n Evaluated by: " + evaluatorsName;
+        return "Evaluation for " + internsName + "\nScore: " + score + "/5\nFeedback: " + feedback + "\nEvaluated by: " + evaluatorsName;
     }
 }

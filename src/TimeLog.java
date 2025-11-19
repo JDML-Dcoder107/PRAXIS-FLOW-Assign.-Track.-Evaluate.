@@ -17,7 +17,7 @@ public class TimeLog {
     }
 
     //date's setter
-    public void setDate(){
+    public void setDate(String date){
         this.date = date;
     }
 
@@ -44,6 +44,6 @@ public class TimeLog {
     //Override the toString for the TimeLog
     @Override
     public String toString(){
-        return "Date: " + date + "Hours: " + hours;
+        return "Date: " + date + " | Hours: " + hours + " | Intern: " + internName;
     }
 }

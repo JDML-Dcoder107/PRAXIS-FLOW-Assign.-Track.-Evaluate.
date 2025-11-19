@@ -55,7 +55,7 @@ public class Internship {
     }
 
     //intern getter
-    public StudentIntern getIntern (){
+    public StudentIntern getIntern(){
         return intern;
     }
 
@@ -67,6 +67,6 @@ public class Internship {
     //Override the toString method in internship
     @Override
     public String toString(){
-        return "Internship[" + internshipId + "]: " + position + " at the company named " + companyName + " - Status: " + status;
+        return "Internship[" + internshipId + "]: " + position + " at " + companyName + " - Status: " + status;
     }
 }
