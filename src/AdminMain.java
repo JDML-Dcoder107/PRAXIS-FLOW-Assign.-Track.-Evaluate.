@@ -89,7 +89,12 @@ public class AdminMain extends User {
     }
 
     //method for the management of user
-    public void manageUser(User user){
-        System.out.println("Managing user: " + user.getName() + " - " + user.getRole());
+    public void deleteUser(User user, String usertype){
+        System.out.println();
+        System.out.println("User deleted successfully: ");
+        System.out.println("Name: " + user.getName());
+        System.out.println("Email: " + user.getEmail());
+        System.out.println("Role:" + user.getRole());
+        totalUser--;
     }
 }

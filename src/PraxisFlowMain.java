@@ -196,9 +196,10 @@ public class PraxisFlowMain {
                 System.out.println("3. View All Internships");
                 System.out.println("4. View All Partnerships");
                 System.out.println("5. View All User");
-                System.out.println("6. Logout");
+                System.out.println("6. Manage User(Delete)");
+                System.out.println("7. Logout");
 
-                int choice = getInputInteger("Enter choice(1-6): ");
+                int choice = getInputInteger("Enter choice(1-7): ");
                 switch (choice) {
                     case 1:
                         approveInternshipMenu((AdminMain) user);
@@ -215,7 +216,9 @@ public class PraxisFlowMain {
                     case 5:
                         viewAllUser();
                         break;
-                    case 6:
+                    case 6: manageUsersMenu((AdminMain) user);
+                    break;
+                    case 7:
                         user.logOut();
                         inSession = false;
                         break;
@@ -758,6 +761,111 @@ public class PraxisFlowMain {
             }
         }
         System.out.println("=============================================");
+    }
+
+    //method for the deletion of user
+    private static void manageUsersMenu(AdminMain admin){
+        System.out.println();
+        System.out.println("=============================================");
+        System.out.println("                 Manage User                 ");
+        System.out.println("=============================================");
+
+        //count the total user
+        int totalUsers = mainAdmin.size() + school.size() + company.size() + stInterns.size();
+
+        if(totalUsers == 0){
+            System.out.println("No users available to manage");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("1. Administrator (" + mainAdmin.size() + ")");
+        System.out.println("2. School Coordinators (" + school.size() + ")");
+        System.out.println("3. Company Mentors/Supervisor  (" + company.size() + ")");
+        System.out.println("4. Student Interns (" + stInterns.size() + ")");
+        System.out.println("5. Cancel");
+
+        int userType = getInputInteger("Enter choice (1-5): ");
+
+        switch (userType){
+            case 1:
+                deleteUserFromList(admin, mainAdmin, "Administrator");
+                break;
+            case 2:
+                deleteUserFromList(admin, school, "School Coordinator");
+                break;
+            case 3:
+                deleteUserFromList(admin, company, "Company Mentor/Supervisor");
+                break;
+            case 4:
+                deleteUserFromList(admin, stInterns, "Student Intern");
+                break;
+            case 5:
+                System.out.println("Operation cancelled.");
+                break;
+            default:
+                System.out.println("Invalid choice.");
+        }
+        System.out.println("=============================================");
+    }
+
+    //deletion helper method
+    private static void deleteUserFromList(AdminMain admin, ArrayList<? extends User> userList, String userType) {
+        if (userList.isEmpty()) {
+            System.out.println("\nNo " + userType + "s available to delete.");
+            return;
+        }
+
+        System.out.println();
+        System.out.println("=== " + userType + "s ===");
+
+        for (int i = 0; i < userList.size(); i++) {
+            User u = userList.get(i);
+            if (u instanceof StudentIntern) {
+                System.out.println((i + 1) + ". " + u.getName() + " (" + ((StudentIntern) u).getSrCode() + ") - " + u.getEmail());
+            } else if (u instanceof School) {
+                System.out.println((i + 1) + ". " + u.getName() + " - " + ((School) u).getSchoolName() + " - " + u.getEmail());
+            } else if (u instanceof Company) {
+                System.out.println((i + 1) + ". " + u.getName() + " - " + ((Company) u).getCompanyName() + " - " + u.getEmail());
+            } else {
+                System.out.println((i + 1) + ". " + u.getName() + " - " + u.getEmail());
+            }
+        }
+
+        int index = getInputInteger("\nSelect user to delete (0 to cancel): ") - 1;
+
+        if (index == -1) {
+            System.out.println("Deletion cancelled.");
+            return;
+        }
+
+        if (index >= 0 && index < userList.size()) {
+            User userToDelete = userList.get(index);
+
+            // Confirmation
+            System.out.print("\n⚠ WARNING: Are you sure you want to delete " + userToDelete.getName() + "? (yes/no): ");
+            String confirmation = input.nextLine().trim().toLowerCase();
+
+            if (confirmation.equals("yes")) {
+                admin.deleteUser(userToDelete, userType);
+                userList.remove(index);
+
+                // If deleting an intern, also clean up their internships
+                if (userToDelete instanceof StudentIntern) {
+                    for (Internship internship : internships) {
+                        if (internship.getIntern() != null &&
+                                internship.getIntern().equals(userToDelete)) {
+                            internship.setIntern(null);
+                            internship.setStatus("Pending");
+                        }
+                    }
+                }
+            } else {
+                System.out.println("Deletion cancelled.");
+            }
+        } else {
+            System.out.println("\n✗ Invalid selection.");
+        }
     }
 
     //method for the students main menu
