@@ -55,7 +55,7 @@ public class Internship {
     }
 
     //intern getter
-    public StudentIntern intern (){
+    public StudentIntern getIntern (){
         return intern;
     }
 

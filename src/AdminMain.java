@@ -36,9 +36,20 @@ public class AdminMain extends User {
           if(internship == null){
               throw new NullPointerException(("Internship object should not leave blank"));
           }
+          //make a new variable for the getter of the intern's status
+            StudentIntern stIntern = internship.getIntern();
 
+          if(stIntern == null){
+              throw new IllegalStateException("No student intern assign to this particular internship");
+          }
+
+          //Updating the status of the internship and the student intern
           internship.setStatus("Approved");
+          stIntern.setStatus("Active");
+
           System.out.println("Administrator: " + getName() + " approved internship of internshipID: " + internship.getInternshipId());
+          System.out.println("Student: " + stIntern.getName() + " status updated to: Active");
+          System.out.println("Position: " + internship.getPosition() + " at " + internship.getCompanyName());
       }
       catch (NullPointerException e){
           System.out.println("Error occurred: " + e.getMessage());
@@ -46,6 +57,33 @@ public class AdminMain extends User {
       catch (Exception e){
           System.out.println("Unexpected error occurred while approving the internship: " + e.getMessage());
       }
+    }
+
+    //Rejecting method of internship
+    public void rejectInternship(Internship internship, String reason){
+        try{
+            if(internship == null){
+                throw new NullPointerException("Internship object should not be left blank.");
+            }
+
+            StudentIntern stIntern = internship.getIntern();
+
+            if(stIntern == null){
+                throw new IllegalStateException("No student intern assigned to this internship");
+            }
+
+            internship.setStatus("Rejected");
+            stIntern.setStatus("Application Failed");
+
+            System.out.println("Administrator: " + getName() + " rejected internship ID: " + internship.getInternshipId());
+            System.out.println("Reason: " + reason);
+        }
+        catch (NullPointerException | IllegalStateException e){
+            System.out.println("Error has been occurred: " + e.getMessage());
+        }
+        catch (Exception e){
+            System.out.println("Unexpected error: " + e.getMessage());
+        }
     }
 
     //method for the management of user

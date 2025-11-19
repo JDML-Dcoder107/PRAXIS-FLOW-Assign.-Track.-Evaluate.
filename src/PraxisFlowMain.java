@@ -13,6 +13,7 @@ public class PraxisFlowMain {
     private static final String companyRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|org|net|co\\.[a-z]{2,})$";
     private static final String schoolRegex = "^[a-zA-Z][a-zA-Z0-9._-]*@g\\.batstate-u\\.edu\\.ph$";
     private static final String adminRegex = "^admin[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\\.[a-z]{2,}$";
+    private static final String yearMothsDayRegex = "^(?:(?:19|20)\\d\\d)-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$\n";
 
     public static void main(String[] args) {
         boolean isItRunning = true;
@@ -305,7 +306,8 @@ public class PraxisFlowMain {
                 System.out.println("3. View Timesheet");
                 System.out.println("4. View Dashboard");
                 System.out.println("5. Create Internship");
-                System.out.println("6. Logout");
+                System.out.println("6. View Evaluation");
+                System.out.println("7. Logout");
 
                 int choice = getInputInteger("Enter a number(1-6): ");
                 switch (choice) {
@@ -322,8 +324,10 @@ public class PraxisFlowMain {
                         user.displayView();
                         break;
                     case 5: createInternshipMenu();
-                    break;
-                    case 6:
+                        break;
+                    case 6: ((StudentIntern)user).viewEvaluationScore();
+                        break;
+                    case 7:
                         user.logOut();
                         inSession = false;
                     default:
@@ -491,8 +495,12 @@ public class PraxisFlowMain {
         double hours = getInputDouble();
         System.out.print("Enter date (YYYY-MM-DD): ");
         String date = input.nextLine();
-
-        studentIntern.loginData(hours, date);
+        if(date.matches(yearMothsDayRegex)) {
+            studentIntern.loginData(hours, date);
+        }
+        else{
+            System.out.println("Invalid input or improper format has been occurred.");
+        }
     }
 
     private static void submitEvalToInternMenu(){

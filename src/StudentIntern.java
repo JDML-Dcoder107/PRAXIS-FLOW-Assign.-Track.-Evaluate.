@@ -4,6 +4,7 @@ import java.util.ArrayList;
 public class StudentIntern extends User implements Evaluate,Tracker{
     private String srCode;
     private String school;
+    private String status;
     private ArrayList<Task> taskLog;
     private ArrayList<TimeLog> timeLogs;
     private Evaluation evaluation;
@@ -12,6 +13,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     public StudentIntern(String srCode, String name, String email, String password, String role, String schoolName){
         super(srCode, name, email, password, "Student Intern");
         this.srCode = srCode;
+        this.status = "Inactive";
         this.taskLog = new ArrayList<>();
         this.timeLogs = new ArrayList<>();
     }
@@ -26,6 +28,16 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         this.school = school;
     }
 
+    //getter for status
+    public String getStatus(){
+        return status;
+    }
+
+    //setter for status
+    public void setStatus(String status){
+        this.status = status;
+    }
+
     //Polymorphism
     @Override
     public void displayView(){
@@ -36,6 +48,7 @@ public class StudentIntern extends User implements Evaluate,Tracker{
         System.out.println();
         System.out.println("Name: " + getName());
         System.out.println("Sr-Code: " + getSrCode());
+        System.out.println("Status: " + status);
         System.out.println("Active Tasks: " + taskLog.size());
         System.out.println("Total Time of Hours: " + getTotalHours());
         if(evaluation != null){
@@ -126,6 +139,13 @@ public class StudentIntern extends User implements Evaluate,Tracker{
     @Override
     public double viewEvaluationScore(){
         if(evaluation != null){
+            System.out.println("Your evaluation result is: " + evaluation.getScore() + "/5");
+            if(evaluation.getScore() < 4 && evaluation.getScore() > 0 ){
+                System.out.println("Congratulation you have passed the internship!!");
+            }
+            else{
+                System.out.println("Important Notice you have Failed the internship");
+            }
             return evaluation.getScore();
         }
         return 0;
