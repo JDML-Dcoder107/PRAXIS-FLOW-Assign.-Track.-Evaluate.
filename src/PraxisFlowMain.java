@@ -276,7 +276,7 @@ public class PraxisFlowMain {
                 System.out.println("3. Assign Task");
                 System.out.println("4. Submit Evaluation");
                 System.out.println("5. View Dashboard");
-                System.out.println("6. Establish ");
+                System.out.println("6. Establish Partnership");
                 System.out.println("7. Logout");
 
                 int choice = getInputInteger("Enter a number(1-7): ");
