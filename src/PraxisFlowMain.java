@@ -230,36 +230,32 @@ public class PraxisFlowMain {
 
             //For the School
             else if (user instanceof School schoolCoordinator) {
-                System.out.println();
-                System.out.println("1. Add Partner Company");
-                System.out.println("2. View Internship Recommendation");
-                System.out.println("3. Monitor Progress");
-                System.out.println("4. Recommend Student");
-                System.out.println("5. View Dashboard");
-                System.out.println("6. Established Partnership");
-                System.out.println("7. Logout");
+                System.out.println();;
+                System.out.println("1. View Internship Recommendation");
+                System.out.println("2. Monitor Progress");
+                System.out.println("3. Recommend Student");
+                System.out.println("4. View Dashboard");
+                System.out.println("5. Established Partnership");
+                System.out.println("6. Logout");
 
-                int choice = getInputInteger("Enter your choice(1-7): ");
+                int choice = getInputInteger("Enter your choice(1-6): ");
                 switch (choice) {
                     case 1:
-                        addPartnerCompanyMenu(schoolCoordinator);
-                        break;
-                    case 2:
                         schoolCoordinator.viewInternshipRecommendation();
                         break;
-                    case 3:
+                    case 2:
                         monitorProgressMenu(schoolCoordinator);
                         break;
-                    case 4:
+                    case 3:
                         recommendStudentMenu(schoolCoordinator);
                         break;
-                    case 5:
+                    case 4:
                         user.displayView();
                         break;
-                    case 6:
+                    case 5:
                         establishPartnershipS();
                         break;
-                    case 7:
+                    case 6:
                         user.logOut();
                         inSession = false;
                         break;
@@ -271,7 +267,7 @@ public class PraxisFlowMain {
             //For the Company
             else if (user instanceof Company mentor) {
                 System.out.println();
-                System.out.println("1. Add Partner School: ");
+                System.out.println("1. Create Internship ");
                 System.out.println("2. Recommended Internship to School");
                 System.out.println("3. Assign Task");
                 System.out.println("4. Submit Evaluation");
@@ -282,7 +278,7 @@ public class PraxisFlowMain {
                 int choice = getInputInteger("Enter a number(1-7): ");
                 switch (choice) {
                     case 1:
-                        addPartnerSchoolMenu(mentor);
+                        createInternshipMenu();
                         break;
                     case 2:
                         recommendInternshipToSchoolMenu();
@@ -315,11 +311,10 @@ public class PraxisFlowMain {
                 System.out.println("2. Complete Task");
                 System.out.println("3. View Timesheet");
                 System.out.println("4. View Dashboard");
-                System.out.println("5. Create Internship");
-                System.out.println("6. View Evaluation");
-                System.out.println("7. Logout");
+                System.out.println("5. View Evaluation");
+                System.out.println("6. Logout");
 
-                int choice = getInputInteger("Enter a number(1-7): ");
+                int choice = getInputInteger("Enter a number(1-6): ");
                 switch (choice) {
                     case 1:
                         logHoursForStudentIntern((StudentIntern) user);
@@ -334,12 +329,9 @@ public class PraxisFlowMain {
                         user.displayView();
                         break;
                     case 5:
-                        createInternshipMenu();
-                        break;
-                    case 6:
                         ((StudentIntern) user).viewEvaluationScore();
                         break;
-                    case 7:
+                    case 6:
                         user.logOut();
                         inSession = false;
                     default:
@@ -452,19 +444,6 @@ public class PraxisFlowMain {
         System.out.println("=============================================");
     }
 
-    //method for the adding of partner school
-    private static void addPartnerSchoolMenu(Company company) {
-        System.out.print("Enter the partner school's name: ");
-        String schoolName = input.nextLine();
-        company.addPartnerSchool(schoolName);
-    }
-
-    //method for the adding a partner company
-    private static void addPartnerCompanyMenu(School school) {
-        System.out.print("Enter the partner company's name: ");
-        String companyName = input.nextLine();
-        school.addPartnerCompany(companyName);
-    }
 
     //method for the assigning of task
     private static void assignTaskToInternMenu() {
