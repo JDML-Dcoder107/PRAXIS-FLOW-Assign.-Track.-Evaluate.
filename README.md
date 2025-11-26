@@ -34,6 +34,9 @@ A small section about you, the creator.
 Your Name - [suspicious link removed]
 Project Link: https://github.com/your-username/your-project
 
+**OOP Concepts Applied**
+
+
 
 
 
