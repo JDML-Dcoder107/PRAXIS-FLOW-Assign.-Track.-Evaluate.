@@ -13,7 +13,7 @@ public class PraxisFlowMain {
     private static final String companyRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.(com|org|net|co\\.[a-z]{2,})$";
     private static final String schoolRegex = "^[a-zA-Z][a-zA-Z0-9._-]*@g\\.batstate-u\\.edu\\.ph$";
     private static final String adminRegex = "^admin[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\\.[a-z]{2,}$";
-    private static final String yearMothsDayRegex = "^(?:(?:19|20)\\d\\d)-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12]\\d|3[01])$";
+    private static final String yearMothsDayRegex = "^(?:(?:19|20)\\d{2}-(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:19|20)\\d{2}-(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:19|20)\\d{2}-02-(?:0[1-9]|1\\d|2[0-8])|(?:19(?:0[48]|[2468][048]|[13579][26])|2000|20(?:0[48]|[2468][048]|[13579][26]))-02-29)$";;
 
     public static void main(String[] args) {
         boolean isItRunning = true;
@@ -230,7 +230,7 @@ public class PraxisFlowMain {
 
             //For the School
             else if (user instanceof School schoolCoordinator) {
-                System.out.println();;
+                System.out.println();
                 System.out.println("1. View Internship Recommendation");
                 System.out.println("2. Monitor Progress");
                 System.out.println("3. Recommend Student");
