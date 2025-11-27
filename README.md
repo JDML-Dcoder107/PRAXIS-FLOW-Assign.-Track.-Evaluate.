@@ -56,6 +56,21 @@ Ensures specific classes adhere to a mandatory set of methods.
 * **Classes Used:** `Abstract Class`, `Student Intern`, `Company`, `Evaluate`, `Tracker`
 
 
+---
+
+## ✍️ Authors
+
+* John Daniel Labiano
+* John Greig Galarbe
+* Joyce Cornel
+
+## 🙏 Acknowledgements
+
+We are grateful to our professor, Sir Emmanuel Charlie Enriquez, for their guidance and support.
+
+
+
+
 
 
 
