@@ -51,9 +51,9 @@ Bundles data and the methods that operate on it, limiting direct access to maint
 Allows objects to implement a common method differently, depending on their type.
 * **Classes Used:** `Student Intern`, `Company`, `School`, `AdminMain`
 
-### **Abstract Interface** (Defining Contracts)
+### **Abstract Class and Interface** (Defining Contracts)
 Ensures specific classes adhere to a mandatory set of methods.
-* **Classes Used:** `Abstract Class`, `Student Intern`, `Company`, `Evaluate`, `Tracker`
+* **Classes Used:** `User`, `Student Intern`, `Company`, `Evaluate`, `Tracker`
 
 
 ---
