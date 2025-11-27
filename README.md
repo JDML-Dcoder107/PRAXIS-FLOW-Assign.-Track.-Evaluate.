@@ -34,7 +34,27 @@ A small section about you, the creator.
 Your Name - [suspicious link removed]
 Project Link: https://github.com/your-username/your-project
 
-**OOP Concepts Applied**
+
+## ⚙️ OOP Concepts Applied
+
+We applied the following OOP principles to ensure a robust and scalable architecture:
+
+### **Inheritance** (Code Reusability)
+Allows sub-classes to reuse methods from parent classes.
+* **Classes Used:** `Student Intern`, `Company`, `School`, `AdminMain`
+
+### **Encapsulation** (Data Protection)
+Bundles data and the methods that operate on it, limiting direct access to maintain integrity.
+* **Classes Used:** `Evaluation`, `Internship`, `Task`, `TimeLog`
+
+### **Polymorphism** (Flexible Behavior)
+Allows objects to implement a common method differently, depending on their type.
+* **Classes Used:** `Student Intern`, `Company`, `School`, `AdminMain`
+
+### **Abstract Interface** (Defining Contracts)
+Ensures specific classes adhere to a mandatory set of methods.
+* **Classes Used:** `Abstract Class`, `Student Intern`, `Company`, `Evaluate`, `Tracker`
+
 
 
 
