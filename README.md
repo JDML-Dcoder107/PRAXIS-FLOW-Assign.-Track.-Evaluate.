@@ -13,7 +13,7 @@ Allows sub-classes to reuse methods from parent classes.
 
 ### **Encapsulation** (Data Protection)
 Bundles data and the methods that operate on it, limiting direct access to maintain integrity.
-* **Classes Used:** `Evaluation`, `Internship`, `Task`, `TimeLog`
+* **Classes Used:** `Evaluation`, `Internship`, `Task`, `TimeLog`, `StudentIntern`, `Company`, `AdminMain`, `School`
 
 ### **Polymorphism** (Flexible Behavior)
 Allows objects to implement a common method differently, depending on their type.
