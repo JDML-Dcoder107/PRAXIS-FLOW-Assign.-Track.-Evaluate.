@@ -874,11 +874,11 @@ public class PraxisFlowMain {
     private static void initializeSampleData() {
         // Add sample users for testing
         mainAdmin.add(new AdminMain("A001", "Maria Santos", "adminmariasantos@gmail.ad", "admin123"));
-        school.add(new School("SC001", "Juan Dela Cruz", "juan@g.batstate-u.edu.ph", "coord123", "Tech University"));
+        school.add(new School("SC001", "Juan Dela Cruz", "juan@g.batstate-u.edu.ph", "coord123", "Batangas State University"));
         company.add(new Company("CM001", "Ana Reyes", "ana@techcorp.com", "mentor123", "TechCorp Solutions"));
-        stInterns.add(new StudentIntern("2021-00123", "Pedro Garcia", "12-34567@g.batstate-u.edu.ph", "intern123", "Tech University"));
+        stInterns.add(new StudentIntern("2021-00123", "Pedro Garcia", "12-34567@g.batstate-u.edu.ph", "intern123", "Batangas State University"));
 
         System.out.println("✓ Sample data initialized.");
-        System.out.println("  Test Login - Email: maria@admin.com, Password: admin123");
+        System.out.println("  Test Login - Email: adminmariasantos@gmail.ad, Password: admin123");
     }
 }
