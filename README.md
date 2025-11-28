@@ -10,6 +10,7 @@ We applied the following OOP principles to ensure a robust and scalable architec
 ### **Inheritance** (Code Reusability)
 Allows sub-classes to reuse methods from parent classes.
 * **Classes Used:** `Student Intern`, `Company`, `School`, `AdminMain`
+* **Inherited From:** `User`
 
 ### **Encapsulation** (Data Protection)
 Bundles data and the methods that operate on it, limiting direct access to maintain integrity.
@@ -20,7 +21,7 @@ Allows objects to implement a common method differently, depending on their type
 * **Classes Used:** `Student Intern`, `Company`, `School`, `AdminMain`
 
 ### **Abstract Class and Interface** (Defining Contracts)
-Ensures specific classes adhere to a mandatory set of methods.
+Ensures specific class and interfaces adhere to a mandatory set of methods.
 * **Classes Used:** `User`, `Evaluate`, `Tracker`
 
 ##  Praxis Flow System Architecture
@@ -36,7 +37,7 @@ The system is built on an Abstract Class, specialized Subclasses (User Roles), a
 | Component | Role | Relationship |
 | :--- | :--- | :--- |
 | **Abstract Class: `User`** | Defines **common properties** (`userID`, `email`) and **base methods** (`login()`, `logout()`) shared by all users in the system. | **Inherited By** all Subclasses (`AdminMain`, `StudentIntern`, etc.). |
-| **Interface (Contract)** | Defines a set of **methods** that all Subclasses *must* implement, enforcing **standardized behavior** across different user roles. | **Implemented By** all Subclasses (`AdminMain`, `StudentIntern`, etc.). |
+| **Interface (Contract)** | Defines a set of **methods** that all Subclasses *must* implement, enforcing **standardized behavior** across different user roles. | **Implemented By** 2 of the Subclasses (`Company`, and `StudentIntern`). |
 | **Subclasses (User Roles)** | Represent the four distinct user roles, implementing **role-specific features** and managing relevant data. | **Inherit From** `User` and **Implement** the `Interface`. |
 | **Supporting Data Models** | Fundamental data structures (`Task`, `Evaluation`, etc.) that hold specific program information. | **Used By** Subclasses, typically stored within their internal data arrays. |
 
