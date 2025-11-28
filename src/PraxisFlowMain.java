@@ -700,7 +700,7 @@ public class PraxisFlowMain {
     private static void viewALlInternships() {
         System.out.println();
         System.out.println("=============================================");
-        System.out.println("||             ALl Internships             ||");
+        System.out.println("||             All Internships             ||");
         System.out.println("=============================================");
         if (internships.isEmpty()) {
             System.out.println("No internship created yet.");
