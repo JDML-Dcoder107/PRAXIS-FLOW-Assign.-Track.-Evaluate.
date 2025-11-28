@@ -21,7 +21,7 @@ Allows objects to implement a common method differently, depending on their type
 
 ### **Abstract Class and Interface** (Defining Contracts)
 Ensures specific classes adhere to a mandatory set of methods.
-* **Classes Used:** `User`, `Student Intern`, `Company`, `Evaluate`, `Tracker`
+* **Classes Used:** `User`, `Evaluate`, `Tracker`
 
 
 ---
