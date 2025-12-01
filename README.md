@@ -134,7 +134,12 @@ Once active, specific features become available for the intern and the company.
 | `Main Admin` | System-wide management and control. | **`View all partnerships`**, **`View all users`**, and the power to **`Delete a user`** from the system. | Complete system-wide oversight and data access. |
 
 ## Sample Output
----
+
+### Admin Main
+![Alt Text](images/photo.png)
+
+
+
 
 ## ✍️ Authors
 
