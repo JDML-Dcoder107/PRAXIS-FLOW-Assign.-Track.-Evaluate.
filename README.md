@@ -51,8 +51,8 @@ These are the primary operational classes, each with unique features and interna
 | :--- | :--- | :--- | :--- |
 | **`AdminMain`** | `User` | **System Oversight**: Approves internships, views all records, and manages user accounts (Delete User). | `Internship`, `LogHour`, `Evaluation`, `Task` |
 | **`StudentIntern`** | `User` | **Program Participation**: Logs work hours, completes tasks, and views personal time sheets and evaluations. | `Task`, `LogHour`, `Evaluation` |
-| **`CompanyMentor`** | `User` | **Internship Management**: Creates internships, assigns tasks, submits evaluations, and manages partnerships. | `Internship`, `Task`, `Evaluation` |
-| **`SchoolCoordinator`** | `User` | **Student Placement & Monitoring**: Recommends students, monitors progress (by date/hours), and views partnerships. | `Internship`, `LogHour` |
+| **`Company`** | `User` | **Internship Management**: Creates internships, assigns tasks, submits evaluations, and manages partnerships. | `Internship`, `Task`, `Evaluation` |
+| **`School`** | `User` | **Student Placement & Monitoring**: Recommends students, monitors progress (by date/hours), and views partnerships. | `Internship`, `LogHour` |
 
 ---
 
