@@ -146,10 +146,10 @@ Once active, specific features become available for the intern and the company.
 
 | Feature | Screenshot |
 |--------|------------|
-| Established Partnership (School → Company) | <img src="OOP/Established Partnership School to Company - School.png" width="300"> |
+| Established Partnership <br> (School → Company)| <img src="OOP/Established Partnership School to Company - School.png" width="300"> |
 | Monitor Progress | <img src="OOP/Monitor Progress - School.png" width="300"> |
 | Recommend Student | <img src="OOP/Recommend Student - School.png" width="300"> |
-| View Internship Recommendation | <img src="OOP/View Internship Recommendation - School.png" width="300"> |
+| View Internship <br> Recommendation | <img src="OOP/View Internship Recommendation - School.png" width="300"> |
 
 | Feature | Screenshot |
 |--------|------------|
