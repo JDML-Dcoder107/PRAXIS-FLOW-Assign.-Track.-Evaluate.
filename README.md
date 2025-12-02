@@ -135,8 +135,38 @@ Once active, specific features become available for the intern and the company.
 
 ## Sample Output
 
-### Admin Main
-![Alt Text](images/photo.png)
+| Feature | Screenshot |
+|--------|------------|
+| Approved Internship 1 | <img src="OOP/Approve Internship 1 - AdminMain.png" width="300"> |
+| Approved Internship 2 | <img src="OOP/Approve Internship 2 - AdminMain.png" width="300"> |
+| Manage User (Delete) | <img src="OOP/Manage User (Delete) - Admin Main.png" width="300"> |
+| View All User | <img src="OOP/View All User - AdminMain.png" width="300"> |
+| View All User After Delete | <img src="OOP/View All User after Manage User(Delete).png" width="300"> |
+| View All Partnership | <img src="OOP/View all Partnership - AdminMain.png" width="300"> |
+
+| Feature | Screenshot |
+|--------|------------|
+| Established Partnership (School → Company) | <img src="OOP/Established Partnership School to Company - School.png" width="300"> |
+| Monitor Progress | <img src="OOP/Monitor Progress - School.png" width="300"> |
+| Recommend Student | <img src="OOP/Recommend Student - School.png" width="300"> |
+| View Internship Recommendation | <img src="OOP/View Internship Recommendation - School.png" width="300"> |
+
+| Feature | Screenshot |
+|--------|------------|
+| Complete Task | <img src="OOP/Complete Task - StudentIntern.png" width="300"> |
+| Log Hours | <img src="OOP/Log Hours - StudentIntern.png" width="300"> |
+| View Evaluation (1) | <img src="OOP/View Evaluation 2 - StudentIntern.png" width="300"> |
+| View Evaluation (2) | <img src="OOP/View Evaluation 2 StudentIntern.png" width="300"> |
+| View Timesheet | <img src="OOP/View Timesheet - StudentIntern.png" width="300"> |
+
+| Feature | Screenshot |
+|--------|------------|
+| Main Screen – Starting Screen | <img src="OOP/Main Screen - Starting Screen.png" width="300"> |
+
+
+
+
+
 
 
 
