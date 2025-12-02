@@ -3,7 +3,7 @@
 **Description**
 The Praxis Flow system is a comprehensive internship and partnership management platform designed to connect students/interns, companies, schools, and administrators. Its primary function is to facilitate the entire internship lifecycle, from registration and task management to progress monitoring, evaluation, and establishing official partnerships.
 
-## ⚙️ OOP Concepts Applied
+##  OOP Concepts Applied
 
 We applied the following OOP principles to ensure a robust and scalable architecture:
 
@@ -163,31 +163,23 @@ Once active, specific features become available for the intern and the company.
 |--------|------------|
 | Main Screen – Starting Screen | <img src="OOP/Main Screen - Starting Screen.png" width="300"> |
 
-
-
-
-
-
-
-
-
-## ✍️ Authors
+##  Authors
 
 * John Daniel Labiano
 * John Greig Galarbe
 * Joyce Cornel
 
-## 🙏 Acknowledgements
+##  Acknowledgements
 
 We are grateful to our professor, Sir Emmanuel Charlie Enriquez, for their guidance and support.
 
-## 🚀 Future Enhancements
+##  Future Enhancements
 
 We have identified the following key areas for future development to significantly improve the system's security, usability, and functionality.
 
 ---
 
-### 1. 🖼️ Comprehensive Graphical User Interface (GUI)
+### 1.  Comprehensive Graphical User Interface (GUI)
 
 The current interface will be replaced with dedicated GUIs for each user subclass to provide a clearer, more efficient, and role-specific view of the system's functionality. 
 
@@ -200,7 +192,7 @@ The current interface will be replaced with dedicated GUIs for each user subclas
 
 ---
 
-### 2. 🔔 Subclass-Specific Notification Panel
+### 2.  Subclass-Specific Notification Panel
 
 A dedicated notification system will be integrated into the GUI of each user type to provide **actionable alerts** and **critical status updates** in real-time. 
 
@@ -215,7 +207,7 @@ A dedicated notification system will be integrated into the GUI of each user typ
 
 ---
 
-### 3. 🔐 Robust Password Security (Hashing)
+### 3.  Robust Password Security (Hashing)
 
 To replace simple encryption and enhance security, we will implement industry-standard **one-way hashing** with **salting**.
 
@@ -225,7 +217,7 @@ To replace simple encryption and enhance security, we will implement industry-st
 
 ---
 
-### 4. ⏳ Proper Time Logging Implementation (Replacing Regex)
+### 4.  Proper Time Logging Implementation (Replacing Regex)
 
 The current reliance on **regex** for time logging validation is insufficient and will be replaced by robust validation and calculation logic using **date/time objects**.
 
