@@ -229,10 +229,3 @@ The current reliance on **regex** for time logging validation is insufficient an
 * **Calculation:** Use programming language functions to reliably calculate the duration:
     $$\text{Duration} = \text{EndDateTime} - \text{StartDateTime}$$
 
-
-
-
-
-
-
-
